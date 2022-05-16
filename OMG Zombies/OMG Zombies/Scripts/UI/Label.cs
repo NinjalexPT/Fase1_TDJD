@@ -28,7 +28,7 @@ namespace OMG_Zombies.Scripts.UI
 
         public void Draw()
         {
-            Game1.SpriteBatch.DrawString(font, text, position, color);
+            Game1.SpriteBatch.DrawString(font, text, position, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
     }
 }

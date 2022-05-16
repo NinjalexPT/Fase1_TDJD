@@ -7,13 +7,21 @@ namespace OMG_Zombies.Scripts.UI
     {
         private string texturePath;
         private Texture2D texture;
-        private Vector2 position;
+        // obtém a posição no centro do ecrã
+        private Vector2 Position
+        {
+            get
+            {
+                Vector2 screenCenter = new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2);
+                Vector2 statusSize = new Vector2(texture.Width, texture.Height);
 
-        public Popup(string texturePath, Vector2 position)
+                return screenCenter - statusSize / 2;
+            }
+        }
+
+        public Popup(string texturePath)
         {
             this.texturePath = texturePath;
-            this.position = position;
-
             LoadContent();
         }
 
@@ -24,7 +32,7 @@ namespace OMG_Zombies.Scripts.UI
 
         public void Draw()
         {
-            Game1.SpriteBatch.Draw(texture, position, Color.White);
+            Game1.SpriteBatch.Draw(texture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
     }
 }

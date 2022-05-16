@@ -85,7 +85,7 @@ namespace OMG_Zombies.Scripts.Effects
             // Calculate the source rectangle of the current frame.
             Rectangle source = new Rectangle(FrameIndex * Animation.SpriteSheet.Height, 0, Animation.SpriteSheet.Height, Animation.SpriteSheet.Height);
 
-            Game1.SpriteBatch.Draw(Animation.SpriteSheet, position, source, Color.White, 0f, Origin, 1f, spriteEffects, 0f);
+            Game1.SpriteBatch.Draw(Animation.SpriteSheet, position, source, Color.White, 0f, Origin, 1f, spriteEffects, 1f);
         }
 
         #endregion

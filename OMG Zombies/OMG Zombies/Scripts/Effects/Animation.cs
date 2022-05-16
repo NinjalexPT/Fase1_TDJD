@@ -46,7 +46,7 @@ namespace OMG_Zombies.Scripts.Effects
         #endregion
 
 
-        #region Criar
+        #region Criar animação
 
         /// <summary>
         /// Constroi uma nova animação.

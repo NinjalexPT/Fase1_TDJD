@@ -14,7 +14,7 @@ namespace OMG_Zombies.Scripts.Sprites
     /// </summary>
     public class Player
     {
-        #region Campos e Propriedes
+        #region Campos e propriedes
 
         // o nível atual
         public Level Level
@@ -96,6 +96,16 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         private float previousBottom;
+
+        private float layer;
+        public float Layer
+        {
+            get { return layer; }
+            set
+            {
+                layer = value;
+            }
+        }
 
         #endregion
 

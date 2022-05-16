@@ -7,6 +7,7 @@ using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.UI;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace OMG_Zombies
@@ -21,11 +22,9 @@ namespace OMG_Zombies
         // recursos padrão do monogame para criar os gráficos do jogo
         private GraphicsDeviceManager graphics;
 
-        // resolução do ecrã
-        private const int ScreenWidth = 1120;
-        private const int ScreenHeight = 640;
-
         // variáveis globais do jogo
+        public static int ScreenWidth = 1120;
+        public static int ScreenHeight = 640;
         public static ContentManager ContentManager;
         public static SpriteBatch SpriteBatch;
         public static GameTime GameTime;
@@ -167,7 +166,7 @@ namespace OMG_Zombies
 
             GameTime = gameTime;
 
-            SpriteBatch.Begin(); // começa a desenhar
+            SpriteBatch.Begin(SpriteSortMode.FrontToBack); // começa a desenhar
 
             DrawLevel();
             DrawLabels();
@@ -201,23 +200,22 @@ namespace OMG_Zombies
 
         private void DrawPopups()
         {
-            Vector2 screenCenter = new Vector2(ScreenWidth / 2, ScreenHeight / 2);
-
             Popup currentPopup = null;
+
             if (level.CompletedLevel)
             {
                 if (level.CompletedLevel)
                 {
-                    currentPopup = new Popup("Popups/you_win", screenCenter);
+                    currentPopup = new Popup("Popups/you_win");
                 }
                 else
                 {
-                    currentPopup = new Popup("Popups/you_lose", screenCenter);
+                    currentPopup = new Popup("Popups/you_lose");
                 }
             }
             else if (!level.Player.IsAlive)
             {
-                currentPopup = new Popup("Popups/you_lose", screenCenter);
+                currentPopup = new Popup("Popups/you_lose");
             }
 
             if (currentPopup != null)

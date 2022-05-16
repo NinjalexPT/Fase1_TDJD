@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.Utils;
 using System;
@@ -18,9 +19,13 @@ namespace OMG_Zombies.Scripts.Scenes
     {
         #region Campos e Propriedes
 
-        private Texture2D[] layers;
+        //private Texture2D[] layers;
         // The layer which entities are drawn on top of.
-        private const int EntityLayer = 2;
+        //private const int EntityLayer = 2;
+
+        // fundos por camadas
+        private List<ScrollingBackground> scrollingBackgrounds;
+
 
         // jogador principal (heroi)
         private Player player;
@@ -88,25 +93,48 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void LoadContent(Stream fileStream, int levelIndex)
         {
-            LoadBackground(levelIndex);
+            LoadBackgrounds(levelIndex);
             LoadSounds();
             LoadTilemap(fileStream);
         }
 
-        private void LoadBackground(int levelIndex)
+        private void LoadBackgrounds(int levelIndex)
         {
-            layers = new Texture2D[1];
-            layers[0] = Game1.ContentManager.Load<Texture2D>("Backgrounds/lvl0-b0");
-
-            // Load background layer textures. For now, all levels must
-            // use the same backgrounds and only use the left-most part of them.
-            //layers = new Texture2D[3];
-            //for (int i = 0; i < layers.Length; ++i)
-            //{
-            //    // Choose a random segment if each background layer for level variety.
-            //    int segmentIndex = levelIndex;
-            //    layers[i] = Game1.ContentManager.Load<Texture2D>("Backgrounds/Layer" + i + "_" + segmentIndex);
-            //}
+            scrollingBackgrounds = new List<ScrollingBackground>()
+            {
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Trees"), 60f)
+                {
+                  Layer = 0.99f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Floor"), 60f)
+                {
+                  Layer = 0.9f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Front"), 40f)
+                {
+                  Layer = 0.8f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Middle"), 30f)
+                {
+                  Layer = 0.79f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Fast"), 25f, true)
+                {
+                  Layer = 0.78f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Back"), 0f)
+                {
+                  Layer = 0.77f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Slow"), 10f, true)
+                {
+                  Layer = 0.7f,
+                },
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Sky"), 0f)
+                {
+                  Layer = 0.1f,
+                }
+            };
         }
 
         private void LoadSounds()
@@ -161,6 +189,7 @@ namespace OMG_Zombies.Scripts.Scenes
             if (player.IsAlive && !completedLevel)
             {
                 DecrementTime();
+                UpdateBackgrounds();
                 UpdatePlayer();
                 UpdatePotions();
                 UpdateEnemies();
@@ -184,6 +213,17 @@ namespace OMG_Zombies.Scripts.Scenes
         private void DecrementTime()
         {
             currentTime -= Game1.GameTime.ElapsedGameTime;
+        }
+
+        /// <summary>
+        /// .
+        /// </summary>
+        private void UpdateBackgrounds()
+        {
+            foreach (ScrollingBackground scrollingBackground in scrollingBackgrounds)
+            {
+                scrollingBackground.Update();
+            }
         }
 
         /// <summary>
@@ -250,21 +290,19 @@ namespace OMG_Zombies.Scripts.Scenes
 
         public void Draw()
         {
-            DrawBackground();
+            DrawBackgrounds();
             DrawTilemap();
             DrawPlayer();
             DrawPotions();
             DrawEnemies();
         }
 
-        private void DrawBackground()
+        private void DrawBackgrounds()
         {
-            Game1.SpriteBatch.Draw(layers[0], Vector2.Zero, Color.White);
-
-            //for (int i = 0; i <= EntityLayer; ++i)
-            //{
-            //    Game1.SpriteBatch.Draw(layers[i], Vector2.Zero, Color.White);
-            //}
+            foreach (ScrollingBackground scrollingBackground in scrollingBackgrounds)
+            {
+                scrollingBackground.Draw();
+            }
         }
 
         private void DrawTilemap()

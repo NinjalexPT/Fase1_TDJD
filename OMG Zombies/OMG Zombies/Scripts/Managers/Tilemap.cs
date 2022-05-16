@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using OMG_Zombies.Scripts.Scenes;
+using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OMG_Zombies.Scripts.Sprites
+namespace OMG_Zombies.Scripts.Managers
 {
     public class Tilemap
     {
@@ -211,7 +212,7 @@ namespace OMG_Zombies.Scripts.Sprites
                     {
                         // Draw it in screen space.
                         Vector2 position = new Vector2(x, y) * Tile.size;
-                        Game1.SpriteBatch.Draw(texture, position, Color.White);
+                        Game1.SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     }
                 }
             }
