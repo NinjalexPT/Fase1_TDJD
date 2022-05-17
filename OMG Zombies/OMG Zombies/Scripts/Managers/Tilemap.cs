@@ -118,26 +118,34 @@ namespace OMG_Zombies.Scripts.Managers
                     return NewEmptyTile(CollisionType.transparent);
 
                 // preenche com tile do tipo bloco
-                case '#':
-                    return NewTile("Tiles/Level_0/centro", CollisionType.block);
+                case 'R':
+                    return NewTile("Tiles/Level_0/R", CollisionType.block);
+                case 'L':
+                    return NewTile("Tiles/Level_0/L", CollisionType.block);
+                case 'M':
+                    return NewTile("Tiles/Level_0/M", CollisionType.block);
+                case 'S':
+                    return NewTile("Tiles/Level_0/S", CollisionType.block);
+                case 'T':
+                    return NewTile("Tiles/Level_0/T", CollisionType.block);
 
                 // preenche com inimigo
-                case '!':
+                case 'V':
                     level.CreateEnemy(GetTileCollider(x, y), "Enemy");
                     return NewEmptyTile(CollisionType.transparent);
 
                 // preenche com poção
-                case 'O':
+                case 'P':
                     level.CreatePotion(GetTileCollider(x, y));
                     return NewEmptyTile(CollisionType.transparent);
 
                 // Coloca o jogador na posição inicial
-                case 'A':
+                case 'I':
                     level.CreatePlayer(GetTileCollider(x, y));
                     return NewEmptyTile(CollisionType.transparent);
 
                 // insere a meta do nível
-                case 'Z':
+                case 'F':
                     level.CreateExit(GetTileCollider(x, y));
                     return NewTile("Tiles/exit", CollisionType.transparent);
 

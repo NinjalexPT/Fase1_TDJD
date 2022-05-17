@@ -102,38 +102,38 @@ namespace OMG_Zombies.Scripts.Scenes
         {
             scrollingBackgrounds = new List<ScrollingBackground>()
             {
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Trees"), 60f)
+                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/lvl0_bg0"), 20f)
                 {
                   Layer = 0.99f,
                 },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Floor"), 60f)
-                {
-                  Layer = 0.9f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Front"), 40f)
-                {
-                  Layer = 0.8f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Middle"), 30f)
-                {
-                  Layer = 0.79f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Fast"), 25f, true)
-                {
-                  Layer = 0.78f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Back"), 0f)
-                {
-                  Layer = 0.77f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Slow"), 10f, true)
-                {
-                  Layer = 0.7f,
-                },
-                new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Sky"), 0f)
-                {
-                  Layer = 0.1f,
-                }
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Floor"), 60f)
+                //{
+                //  Layer = 0.9f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Front"), 40f)
+                //{
+                //  Layer = 0.8f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Middle"), 30f)
+                //{
+                //  Layer = 0.79f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Fast"), 25f, true)
+                //{
+                //  Layer = 0.78f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Hills_Back"), 0f)
+                //{
+                //  Layer = 0.77f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Clouds_Slow"), 10f, true)
+                //{
+                //  Layer = 0.7f,
+                //},
+                //new ScrollingBackground(Game1.ContentManager.Load<Texture2D>("Backgrounds/Sky"), 0f)
+                //{
+                //  Layer = 0.1f,
+                //}
             };
         }
 
@@ -220,9 +220,16 @@ namespace OMG_Zombies.Scripts.Scenes
         /// </summary>
         private void UpdateBackgrounds()
         {
-            foreach (ScrollingBackground scrollingBackground in scrollingBackgrounds)
+            // se o jogador estava a correr, permite mover o fundo,
+            // senão estiver a correr, o fundo não se mexe
+            if (Player.WasRunning)
             {
-                scrollingBackground.Update();
+                foreach (ScrollingBackground scrollingBackground in scrollingBackgrounds)
+                {
+                    scrollingBackground.Update();
+                }
+
+                player.WasRunning = false;
             }
         }
 

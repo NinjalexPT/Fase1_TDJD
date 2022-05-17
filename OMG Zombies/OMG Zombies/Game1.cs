@@ -7,7 +7,6 @@ using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.UI;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace OMG_Zombies
