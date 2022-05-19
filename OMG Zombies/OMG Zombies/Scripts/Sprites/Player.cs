@@ -219,14 +219,14 @@ namespace OMG_Zombies.Scripts.Sprites
                 Game1.KeyboardManager.isKeyHeld(Keys.D))
             {
                 speed = 10000f;
-                wasWalking = true;
+                wasRunning = true;
             }
             // se foi para esquerda
             else if (Game1.KeyboardManager.isKeyHeld(Keys.Left) ||
                 Game1.KeyboardManager.isKeyHeld(Keys.A))
             {
                 speed = -10000f;
-                wasWalking = true;
+                wasRunning = true;
             }
 
             // se saltou

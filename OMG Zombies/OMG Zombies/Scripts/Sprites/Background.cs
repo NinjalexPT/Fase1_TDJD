@@ -5,34 +5,20 @@ namespace OMG_Zombies.Scripts.Sprites
 {
     public class Background
     {
-        public Vector2 Velocity;
-        private float layer;
         private Texture2D texture;
+        private Vector2 position;
+        private float layer;
 
-        public float Layer
-        {
-            get => layer;
-            set => layer = value;
-        }
-
-        public Vector2 Position;
-
-        public Rectangle Rectangle
-        {
-            get
-            {
-                return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
-            }
-        }
-
-        public Background(Texture2D texture)
+        public Background(Texture2D texture, Vector2 position, float layer)
         {
             this.texture = texture;
+            this.position = position;
+            this.layer = layer;
         }
 
         public void Draw()
         {
-            Game1.SpriteBatch.Draw(texture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, layer);
+            Game1.SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, layer);
         }
     }
 }

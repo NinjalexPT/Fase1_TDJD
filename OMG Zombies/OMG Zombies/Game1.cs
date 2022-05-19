@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Scenes;
+using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.UI;
 using System;
 using System.IO;
@@ -35,6 +36,8 @@ namespace OMG_Zombies
         private int levelIndex = -1;
         private bool wasPlaying;
 
+        private static Camera camera;
+
         #endregion
 
 
@@ -64,6 +67,8 @@ namespace OMG_Zombies
         {
             // permite que sejam desenhadas texturas no ecrã
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+          
+            camera = new Camera(GraphicsDevice.Viewport);
 
             PlayBackgroundSong();
 
@@ -137,12 +142,22 @@ namespace OMG_Zombies
                     }
                 }
             }
-
             wasPlaying = isPlaying;
 
-            level.Update();
+            UpdateLevel();
+            UpdateCamera();
 
             base.Update(gameTime);
+        }
+
+        private void UpdateLevel()
+        {
+            level.Update();
+        }
+
+        private void UpdateCamera()
+        {
+            camera.Update(level.Player.Position, (int)level.Player.Position.X * Tile.WIDTH, 640);
         }
 
         private void PressKeyToExitGame()
@@ -165,7 +180,7 @@ namespace OMG_Zombies
 
             GameTime = gameTime;
 
-            SpriteBatch.Begin(SpriteSortMode.FrontToBack); // começa a desenhar
+            SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform); // começa a desenhar
 
             DrawLevel();
             DrawLabels();
