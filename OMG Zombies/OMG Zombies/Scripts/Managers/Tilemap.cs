@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.Utils;
 using System;
@@ -166,7 +165,7 @@ namespace OMG_Zombies.Scripts.Managers
         /// </summary>
         private Tile NewTile(string name, CollisionType collision)
         {
-            return new Tile(Game1.ContentManager.Load<Texture2D>(name), collision);
+            return new Tile(Game1._Content.Load<Texture2D>(name), collision);
         }
 
         /// <summary>
@@ -226,7 +225,7 @@ namespace OMG_Zombies.Scripts.Managers
                     {
                         // Draw it in screen space.
                         Vector2 position = new Vector2(x, y) * Tile.size;
-                        Game1.SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                        Game1._SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     }
                 }
             }

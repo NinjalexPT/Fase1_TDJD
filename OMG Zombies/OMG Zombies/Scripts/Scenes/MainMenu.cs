@@ -21,8 +21,8 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Carregar menu
 
-        public MainMenu(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-            : base(game, graphicsDevice, content)
+        public MainMenu(Game1 game)
+            : base(game)
         {
             LoadContent();
         }
@@ -39,7 +39,7 @@ namespace OMG_Zombies.Scripts.Scenes
             try
             {
                 MediaPlayer.IsRepeating = true;
-                MediaPlayer.Play(content.Load<Song>("Sounds/Music"));
+                MediaPlayer.Play(Game1._Content.Load<Song>("Sounds/Music"));
             }
             catch
             {
@@ -49,35 +49,35 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void LoadLogo()
         {
-            logo = content.Load<Texture2D>("Logos/logomenu");
+            logo = Game1._Content.Load<Texture2D>("Logos/logomenu");
         }
 
         private void LoadButtons()
         {
-            Texture2D buttonTexture = content.Load<Texture2D>("Button");
-            SpriteFont buttonFont_normal = content.Load<SpriteFont>("Fonts/charybdis_normal");
-            SpriteFont buttonFont_big = content.Load<SpriteFont>("Fonts/charybdis_big");
+            Texture2D buttonTexture = Game1._Content.Load<Texture2D>("Button");
+            SpriteFont buttonFont_normal = Game1._Content.Load<SpriteFont>("Fonts/charybdis_normal");
+            SpriteFont buttonFont_big = Game1._Content.Load<SpriteFont>("Fonts/charybdis_big");
 
             Button quitGameButton = new Button(buttonTexture, buttonFont_normal)
             {
-                //Position = new Vector2(Game1.ScreenCenter.X - buttonFont.Texture.Width / 2, 500),
-                Position = new Vector2(Game1.ScreenCenter.X - 400, Game1.ScreenCenter.Y + 160),
+                //Position = new Vector2(Game1._ScreenCenter.X - buttonFont.Texture.Width / 2, 500),
+                Position = new Vector2(Game1._ScreenCenter.X - 400, Game1._ScreenCenter.Y + 160),
                 Text = "Creditos",
             };
             quitGameButton.Click += QuitGameButton_Click;
 
             Button playGameButton = new Button(buttonTexture, buttonFont_big)
             {
-                //Position = new Vector2(Game1.ScreenCenter.X - buttonFont.Texture.Width / 2, 450),
-                Position = new Vector2(Game1.ScreenCenter.X - 100, Game1.ScreenCenter.Y + 160),
+                //Position = new Vector2(Game1._ScreenCenter.X - buttonFont.Texture.Width / 2, 450),
+                Position = new Vector2(Game1._ScreenCenter.X - 100, Game1._ScreenCenter.Y + 160),
                 Text = "Jogar",
             };
             playGameButton.Click += PlayGameButton_Click;
 
             Button creditsGameButton = new Button(buttonTexture, buttonFont_normal)
             {
-                //Position = new Vector2(Game1.ScreenCenter.X - buttonFont.Texture.Width / 2, 500),
-                Position = new Vector2(Game1.ScreenCenter.X + 150, Game1.ScreenCenter.Y + 160),
+                //Position = new Vector2(Game1._ScreenCenter.X - buttonFont.Texture.Width / 2, 500),
+                Position = new Vector2(Game1._ScreenCenter.X + 150, Game1._ScreenCenter.Y + 160),
                 Text = "Sair",
             };
             creditsGameButton.Click += QuitGameButton_Click;
@@ -97,8 +97,8 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void PlayGameButton_Click(object sender, EventArgs e)
         {
-            Game1.currentSceneType = SceneType.Gameplay;
-            Game1.currentScene = new Gameplay(game, graphicsDevice, content);
+            Game1._CurrentSceneType = SceneType.Gameplay;
+            Game1._CurrentScene = new Gameplay(game);
         }
 
         private void QuitGameButton_Click(object sender, EventArgs e)
@@ -111,11 +111,11 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Atualizar menu
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             foreach (Button button in buttons)
             {
-                button.Update(gameTime);
+                button.Update();
             }
         }
 
@@ -124,26 +124,26 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Desenhar menu
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw()
         {
-            spriteBatch.Begin();
+            Game1._SpriteBatch.Begin();
 
-            DrawLogo(spriteBatch);
-            DrawButtons(gameTime, spriteBatch);
+            DrawLogo();
+            DrawButtons();
 
-            spriteBatch.End();
+            Game1._SpriteBatch.End();
         }
 
-        private void DrawLogo(SpriteBatch spriteBatch)
+        private void DrawLogo()
         {
-            spriteBatch.Draw(logo, new Vector2(Game1.ScreenCenter.X - logo.Width / 2, Game1.ScreenCenter.Y - 265), Color.White);
+            Game1._SpriteBatch.Draw(logo, new Vector2(Game1._ScreenCenter.X - logo.Width / 2, Game1._ScreenCenter.Y - 265), Color.White);
         }
 
-        private void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
+        private void DrawButtons()
         {
             foreach (Button button in buttons)
             {
-                button.Draw(gameTime, spriteBatch);
+                button.Draw();
             }
         }
 

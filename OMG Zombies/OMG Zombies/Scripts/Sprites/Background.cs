@@ -18,7 +18,7 @@ namespace OMG_Zombies.Scripts.Sprites
 
         public void Draw()
         {
-            Game1.SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, layer);
+            Game1._SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, layer);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace OMG_Zombies.Scripts.UI
             TextColor = Color.White;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
@@ -61,21 +61,21 @@ namespace OMG_Zombies.Scripts.UI
             }
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw()
         {
             Color color = Color.Black;
 
             //if (isHovering)
             //    colour = Color.Gray;
 
-            spriteBatch.Draw(texture, Rectangle, color);
+            Game1._SpriteBatch.Draw(texture, Rectangle, color);
 
             if (!string.IsNullOrEmpty(Text))
             {
                 float x = (Rectangle.X + (Rectangle.Width / 2)) - (font.MeasureString(Text).X / 2);
                 float y = (Rectangle.Y + (Rectangle.Height / 2)) - (font.MeasureString(Text).Y / 2);
-                
-                spriteBatch.DrawString(font, Text, new Vector2(x, y), TextColor);
+
+                Game1._SpriteBatch.DrawString(font, Text, new Vector2(x, y), TextColor);
             }
         }
 

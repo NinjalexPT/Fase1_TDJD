@@ -98,7 +98,7 @@ namespace OMG_Zombies.Scripts.Managers
 
         private void LoadSounds()
         {
-            completedLevelSound = Game1.ContentManager.Load<SoundEffect>("Sounds/ExitReached");
+            completedLevelSound = Game1._Content.Load<SoundEffect>("Sounds/ExitReached");
         }
 
         private void LoadTilemap(Stream fileStream)
@@ -114,8 +114,8 @@ namespace OMG_Zombies.Scripts.Managers
             for (int i = 0; i < numberOfBackgrounds; i++)
             {
                 backgrounds.Add(new Background(
-                    Game1.ContentManager.Load<Texture2D>("Backgrounds/lvl" + levelIndex),
-                    new Vector2(i * Game1.ScreenWidth, 0),
+                    Game1._Content.Load<Texture2D>("Backgrounds/lvl" + levelIndex),
+                    new Vector2(i * Game1._ScreenWidth, 0),
                     0.99f));
             }
         }
@@ -184,7 +184,7 @@ namespace OMG_Zombies.Scripts.Managers
         /// </summary>
         private void DecrementTime()
         {
-            currentTime -= Game1.GameTime.ElapsedGameTime;
+            currentTime -= Game1._GameTime.ElapsedGameTime;
         }
 
         /// <summary>

@@ -56,8 +56,8 @@ namespace OMG_Zombies.Scripts.Sprites
         /// </summary>
         public void LoadContent(string filename)
         {
-            texture = Game1.ContentManager.Load<Texture2D>("Tiles/" + filename);
-            collectedSound = Game1.ContentManager.Load<SoundEffect>("Sounds/GemCollected");
+            texture = Game1._Content.Load<Texture2D>("Tiles/" + filename);
+            collectedSound = Game1._Content.Load<SoundEffect>("Sounds/GemCollected");
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace OMG_Zombies.Scripts.Sprites
         /// </summary>
         public void Draw()
         {
-            Game1.SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            Game1._SpriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
     }
 }

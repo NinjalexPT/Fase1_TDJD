@@ -32,8 +32,8 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Carregar gameplay
 
-        public Gameplay(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-            : base(game, graphicsDevice, content)
+        public Gameplay(Game1 game)
+            : base(game)
         {
             LoadContent();
         }
@@ -80,7 +80,7 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Atualizar gameplay
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             KeyboardManager.Update();
 
@@ -107,8 +107,8 @@ namespace OMG_Zombies.Scripts.Scenes
 
             if (levelIndex - 1 == numberOfLevels)
             {
-                Game1.currentSceneType = SceneType.MainMenu;
-                Game1.currentScene = new Gameplay(game, graphicsDevice, content);
+                Game1._CurrentSceneType = SceneType.MainMenu;
+                Game1._CurrentScene = new Gameplay(game);
             }
         }
 
@@ -127,15 +127,15 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Desenhar gameplay
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw()
         {
-            Game1.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
+            Game1._SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
             DrawLevel();
             DrawLabels();
             DrawPopups();
 
-            Game1.SpriteBatch.End();
+            Game1._SpriteBatch.End();
         }
 
         private void DrawLevel()

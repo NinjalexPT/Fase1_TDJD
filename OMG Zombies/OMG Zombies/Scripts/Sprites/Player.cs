@@ -132,14 +132,14 @@ namespace OMG_Zombies.Scripts.Sprites
         public void LoadContent()
         {
             // sprite sheets animadas
-            idleAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/idle"), 0.1f, true);
-            runAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/run"), 0.1f, true);
-            jumpAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/jump"), 0.1f, false);
-            deadAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
+            idleAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/idle"), 0.1f, true);
+            runAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/run"), 0.1f, true);
+            jumpAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/jump"), 0.1f, false);
+            deadAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
 
             // sons
-            jumpSound = Game1.ContentManager.Load<SoundEffect>("Sounds/PlayerJump");
-            dieSound = Game1.ContentManager.Load<SoundEffect>("Sounds/PlayerKilled");
+            jumpSound = Game1._Content.Load<SoundEffect>("Sounds/PlayerJump");
+            dieSound = Game1._Content.Load<SoundEffect>("Sounds/PlayerKilled");
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace OMG_Zombies.Scripts.Sprites
         /// </summary>
         public void ApplyPhysics()
         {
-            float elapsedTime = (float)Game1.GameTime.ElapsedGameTime.TotalSeconds;
+            float elapsedTime = (float)Game1._GameTime.ElapsedGameTime.TotalSeconds;
 
             // aplica movimento para a direita ou esquerda
             velocity.X = speed * elapsedTime;
