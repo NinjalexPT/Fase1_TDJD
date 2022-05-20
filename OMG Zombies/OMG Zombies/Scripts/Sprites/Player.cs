@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using OMG_Zombies.Scripts.Effects;
 using OMG_Zombies.Scripts.Managers;
+using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.Utils;
 using System;
 
@@ -131,10 +132,10 @@ namespace OMG_Zombies.Scripts.Sprites
         public void LoadContent()
         {
             // sprite sheets animadas
-            idleAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Player/idle"), 0.1f, true);
-            runAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Player/run"), 0.1f, true);
-            jumpAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Player/jump"), 0.1f, false);
-            deadAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Player/dead"), 0.1f, false);
+            idleAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/idle"), 0.1f, true);
+            runAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/run"), 0.1f, true);
+            jumpAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/jump"), 0.1f, false);
+            deadAnimation = new Animation(Game1.ContentManager.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
 
             // sons
             jumpSound = Game1.ContentManager.Load<SoundEffect>("Sounds/PlayerJump");
@@ -206,21 +207,21 @@ namespace OMG_Zombies.Scripts.Sprites
         private void PressKey()
         {
             // se foi para direita
-            if (Game1.KeyboardManager.isKeyHeld(Keys.Right) ||
-                Game1.KeyboardManager.isKeyHeld(Keys.D))
+            if (Gameplay.KeyboardManager.isKeyHeld(Keys.Right) ||
+                Gameplay.KeyboardManager.isKeyHeld(Keys.D))
             {
                 speed = 10000f;
             }
             // se foi para esquerda
-            else if (Game1.KeyboardManager.isKeyHeld(Keys.Left) ||
-                Game1.KeyboardManager.isKeyHeld(Keys.A))
+            else if (Gameplay.KeyboardManager.isKeyHeld(Keys.Left) ||
+                Gameplay.KeyboardManager.isKeyHeld(Keys.A))
             {
                 speed = -10000f;
             }
 
             // se saltou
-            if (Game1.KeyboardManager.isKeyHeld(Keys.Space) ||
-                Game1.KeyboardManager.isKeyHeld(Keys.W))
+            if (Gameplay.KeyboardManager.isKeyHeld(Keys.Space) ||
+                Gameplay.KeyboardManager.isKeyHeld(Keys.W))
             {
                 isJumping = true;
             }

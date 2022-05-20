@@ -110,11 +110,11 @@ namespace OMG_Zombies.Scripts.Managers
         {
             int numberOfBackgrounds = tilemap.Width / Tile.WIDTH;
             backgrounds = new List<Background>();
-         
+
             for (int i = 0; i < numberOfBackgrounds; i++)
             {
                 backgrounds.Add(new Background(
-                    Game1.ContentManager.Load<Texture2D>("Backgrounds/lvl" + levelIndex + "_bg0"),
+                    Game1.ContentManager.Load<Texture2D>("Backgrounds/lvl" + levelIndex),
                     new Vector2(i * Game1.ScreenWidth, 0),
                     0.99f));
             }
@@ -141,9 +141,9 @@ namespace OMG_Zombies.Scripts.Managers
         /// <summary>
         /// Cria uma poção.
         /// </summary>
-        public void CreatePotion(Rectangle tileCollider)
+        public void CreatePotion(Rectangle tileCollider, string filename)
         {
-            potions.Add(new Potion(this, tileCollider));
+            potions.Add(new Potion(this, tileCollider, filename));
         }
 
         public void CreateExit(Rectangle tileCollider)

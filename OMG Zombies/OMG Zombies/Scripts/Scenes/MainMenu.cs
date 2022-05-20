@@ -34,6 +34,19 @@ namespace OMG_Zombies.Scripts.Scenes
             LoadButtons();
         }
 
+        private void PlayBackgroundSong()
+        {
+            try
+            {
+                MediaPlayer.IsRepeating = true;
+                MediaPlayer.Play(content.Load<Song>("Sounds/Music"));
+            }
+            catch
+            {
+                throw new NotSupportedException("Erro: Impossível carregar música do jogo.");
+            }
+        }
+
         private void LoadLogo()
         {
             logo = content.Load<Texture2D>("Logos/logomenu");
@@ -77,28 +90,15 @@ namespace OMG_Zombies.Scripts.Scenes
             };
         }
 
-        private void PlayBackgroundSong()
-        {
-            try
-            {
-                MediaPlayer.IsRepeating = true;
-                MediaPlayer.Play(content.Load<Song>("Sounds/Music"));
-            }
-            catch
-            {
-                throw new NotSupportedException("Erro: Impossível carregar música do jogo.");
-            }
-        }
-
         #endregion
 
 
-        #region Eventos de clique
+        #region Eventos de input (mouse)
 
         private void PlayGameButton_Click(object sender, EventArgs e)
         {
-            game.currentSceneType = SceneType.Gameplay;
-            game.currentScene = new Gameplay(game, graphicsDevice, content);
+            Game1.currentSceneType = SceneType.Gameplay;
+            Game1.currentScene = new Gameplay(game, graphicsDevice, content);
         }
 
         private void QuitGameButton_Click(object sender, EventArgs e)

@@ -42,21 +42,21 @@ namespace OMG_Zombies.Scripts.Sprites
         /// <summary>
         /// Controis uma nova poção.
         /// </summary>
-        public Potion(Level level, Rectangle collider)
+        public Potion(Level level, Rectangle collider, string filename)
         {
             this.level = level;
             this.collider = collider;
             position = new Vector2(collider.X, collider.Y);
 
-            LoadContent();
+            LoadContent(filename);
         }
 
         /// <summary>
         /// Loads the gem texture and collected sound.
         /// </summary>
-        public void LoadContent()
+        public void LoadContent(string filename)
         {
-            texture = Game1.ContentManager.Load<Texture2D>("Sprites/Potion");
+            texture = Game1.ContentManager.Load<Texture2D>("Tiles/" + filename);
             collectedSound = Game1.ContentManager.Load<SoundEffect>("Sounds/GemCollected");
         }
 

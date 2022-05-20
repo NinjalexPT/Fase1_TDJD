@@ -119,15 +119,15 @@ namespace OMG_Zombies.Scripts.Managers
 
                 // preenche com tile do tipo bloco
                 case 'R':
-                    return NewTile("Tiles/Level_0/R", CollisionType.block);
+                    return NewTile("Tiles/R", CollisionType.block);
                 case 'L':
-                    return NewTile("Tiles/Level_0/L", CollisionType.block);
+                    return NewTile("Tiles/L", CollisionType.block);
                 case 'M':
-                    return NewTile("Tiles/Level_0/M", CollisionType.block);
+                    return NewTile("Tiles/M", CollisionType.block);
                 case 'S':
-                    return NewTile("Tiles/Level_0/S", CollisionType.block);
+                    return NewTile("Tiles/S", CollisionType.block);
                 case 'T':
-                    return NewTile("Tiles/Level_0/T", CollisionType.block);
+                    return NewTile("Tiles/T", CollisionType.block);
 
                 // preenche com inimigo
                 case 'V':
@@ -135,8 +135,14 @@ namespace OMG_Zombies.Scripts.Managers
                     return NewEmptyTile(CollisionType.transparent);
 
                 // preenche com poção
-                case 'P':
-                    level.CreatePotion(GetTileCollider(x, y));
+                case 'G': // amarela
+                    level.CreatePotion(GetTileCollider(x, y), "G");
+                    return NewEmptyTile(CollisionType.transparent);
+                case 'P': // azul
+                    level.CreatePotion(GetTileCollider(x, y), "P");
+                    return NewEmptyTile(CollisionType.transparent);
+                case 'W': // vermelha
+                    level.CreatePotion(GetTileCollider(x, y), "W");
                     return NewEmptyTile(CollisionType.transparent);
 
                 // Coloca o jogador na posição inicial
@@ -147,7 +153,7 @@ namespace OMG_Zombies.Scripts.Managers
                 // insere a meta do nível
                 case 'F':
                     level.CreateExit(GetTileCollider(x, y));
-                    return NewTile("Tiles/exit", CollisionType.transparent);
+                    return NewTile("Tiles/F", CollisionType.transparent);
 
                 // caractere para o tile não encontrado
                 default:
