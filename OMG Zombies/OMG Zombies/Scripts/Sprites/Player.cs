@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using OMG_Zombies.Scripts.Effects;
-using OMG_Zombies.Scripts.Scenes;
+using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Utils;
 using System;
 
@@ -65,15 +65,6 @@ namespace OMG_Zombies.Scripts.Sprites
         public float Speed
         {
             get => speed;
-        }
-
-        // variável auxiliar para dizer se estava o jogador estava a correr,
-        // é necessário para parar ou mover o fundo, quando o jogador está ou não parado
-        private bool wasRunning;
-        public bool WasRunning
-        {
-            get => wasRunning;
-            set => wasRunning = value;
         }
 
         // estado do salto
@@ -219,14 +210,12 @@ namespace OMG_Zombies.Scripts.Sprites
                 Game1.KeyboardManager.isKeyHeld(Keys.D))
             {
                 speed = 10000f;
-                wasRunning = true;
             }
             // se foi para esquerda
             else if (Game1.KeyboardManager.isKeyHeld(Keys.Left) ||
                 Game1.KeyboardManager.isKeyHeld(Keys.A))
             {
                 speed = -10000f;
-                wasRunning = true;
             }
 
             // se saltou

@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.UI;
+using OMG_Zombies.Scripts.Utils;
 using System;
 using System.IO;
 
@@ -25,6 +25,7 @@ namespace OMG_Zombies
         // variáveis globais do jogo
         public static int ScreenWidth = 1120;
         public static int ScreenHeight = 640;
+        public static Point ScreenCenter = new Point(ScreenWidth / 2, ScreenHeight / 2);
         public static ContentManager ContentManager;
         public static SpriteBatch SpriteBatch;
         public static GameTime GameTime;
@@ -35,6 +36,9 @@ namespace OMG_Zombies
         private const int numberOfLevels = 3;
         private int levelIndex = -1;
         private bool wasPlaying;
+
+        public SceneType currentSceneType;
+        public Scene currentScene;
 
         private static Camera camera;
 
@@ -67,13 +71,17 @@ namespace OMG_Zombies
         {
             // permite que sejam desenhadas texturas no ecrã
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-          
-            camera = new Camera(GraphicsDevice.Viewport);
 
-            PlayBackgroundSong();
+            //currentScene = SceneType.MainMenu;
+            //camera = new Camera(GraphicsDevice.Viewport);
+
+            //currentSceneType = SceneType.MainMenu;
+            currentScene = new MainMenu(this, graphics.GraphicsDevice, Content);
+
+            //PlayBackgroundSong();
 
             LoadKeyboardManager();
-            LoadNextLevel();
+            //LoadNextLevel();
         }
 
         private void LoadKeyboardManager()
@@ -81,18 +89,18 @@ namespace OMG_Zombies
             KeyboardManager = new KeyboardManager();
         }
 
-        private void PlayBackgroundSong()
-        {
-            try
-            {
-                MediaPlayer.IsRepeating = true;
-                MediaPlayer.Play(Content.Load<Song>("Sounds/Music"));
-            }
-            catch
-            {
-                throw new NotSupportedException("Erro: Impossível carregar música do jogo.");
-            }
-        }
+        //private void PlayBackgroundSong()
+        //{
+        //    try
+        //    {
+        //        MediaPlayer.IsRepeating = true;
+        //        MediaPlayer.Play(Content.Load<Song>("Sounds/Music"));
+        //    }
+        //    catch
+        //    {
+        //        throw new NotSupportedException("Erro: Impossível carregar música do jogo.");
+        //    }
+        //}
 
         private void LoadNextLevel()
         {
@@ -121,33 +129,54 @@ namespace OMG_Zombies
 
         protected override void Update(GameTime gameTime)
         {
-            PressKeyToExitGame();
-
-            GameTime = gameTime;
             KeyboardManager.Update();
 
-            bool isPlaying = KeyboardManager.IsKeyPressed(Keys.Space);
+            currentScene.Update(gameTime);
 
-            if (!wasPlaying && isPlaying)
-            {
-                if (!level.Player.IsAlive)
-                {
-                    level.StartNewLife();
-                }
-                else if (level.CurrentTime == TimeSpan.Zero)
-                {
-                    if (level.CompletedLevel)
-                    {
-                        LoadNextLevel();
-                    }
-                }
-            }
-            wasPlaying = isPlaying;
+            //PressKeyToExitGame();
 
-            UpdateLevel();
-            UpdateCamera();
+            //switch (currentSceneType)
+            //{
+            //    case SceneType.MainMenu:
+            //        // Respond to user input for menu selections, etc
+            //        //if (clickedStartGameButton)
+            //        //{
+            //        //    currentScene = SceneType.Gameplay;
+            //        //}
+            //        break;
+            //    case SceneType.Gameplay:
+            //        GameTime = gameTime;
+            //        KeyboardManager.Update();
 
-            base.Update(gameTime);
+            //        bool isPlaying = KeyboardManager.IsKeyPressed(Keys.Space);
+
+            //        if (!wasPlaying && isPlaying)
+            //        {
+            //            if (!level.Player.IsAlive)
+            //            {
+            //                level.StartNewLife();
+            //            }
+            //            else if (level.CurrentTime == TimeSpan.Zero)
+            //            {
+            //                if (level.CompletedLevel)
+            //                {
+            //                    LoadNextLevel();
+            //                }
+            //            }
+            //        }
+            //        wasPlaying = isPlaying;
+
+            //        UpdateLevel();
+            //        UpdateCamera();
+
+            //        if (levelIndex - 1 == numberOfLevels)
+            //        {
+            //            currentSceneType = SceneType.MainMenu;
+            //        }
+            //        break;
+            //}
+
+            base.Update(GameTime);
         }
 
         private void UpdateLevel()
@@ -180,13 +209,27 @@ namespace OMG_Zombies
 
             GameTime = gameTime;
 
-            SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform); // começa a desenhar
+            currentScene.Draw(gameTime, SpriteBatch);
 
-            DrawLevel();
-            DrawLabels();
-            DrawPopups();
+            // começa a desenhar
+            //SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
-            SpriteBatch.End(); // termina de desenhar
+            //switch (currentSceneType)
+            //{
+            //    case SceneType.MainMenu:
+
+            //        break;
+            //    case SceneType.Gameplay:
+            //        GameTime = gameTime;
+
+            //        DrawLevel();
+            //        DrawLabels();
+            //        DrawPopups();
+            //        break;
+            //}
+
+            // termina de desenhar
+            //SpriteBatch.End();
 
             base.Draw(gameTime);
         }

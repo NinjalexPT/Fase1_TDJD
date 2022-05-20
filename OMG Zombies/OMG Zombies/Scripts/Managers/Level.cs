@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OMG_Zombies.Scripts.Scenes
+namespace OMG_Zombies.Scripts.Managers
 {
     /// <summary>
     /// Controla um nível do jogo.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using OMG_Zombies.Scripts.Scenes;
+using OMG_Zombies.Scripts.Managers;
 
 namespace OMG_Zombies.Scripts.Sprites
 {

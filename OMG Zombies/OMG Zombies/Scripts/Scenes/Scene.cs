@@ -15,11 +15,7 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region métodos
-
-        public abstract void LoadContent();
-
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        #region Métodos base
 
         public Scene(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
@@ -27,6 +23,10 @@ namespace OMG_Zombies.Scripts.Scenes
             this.graphicsDevice = graphicsDevice;
             this.content = Game1.ContentManager;
         }
+
+        public abstract void LoadContent();
+
+        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         public abstract void Update(GameTime gameTime);
 
