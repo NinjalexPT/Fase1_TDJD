@@ -23,12 +23,12 @@ namespace OMG_Zombies.Scripts.UI
 
         private void LoadContent()
         {
-            font = Game1._Content.Load<SpriteFont>(fontPath);
+            font = Game1._content.Load<SpriteFont>(fontPath);
         }
 
         public void Draw()
         {
-            Game1._SpriteBatch.DrawString(font, text, position, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            Game1._spriteBatch.DrawString(font, text, position, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
     }
 }

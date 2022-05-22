@@ -132,14 +132,14 @@ namespace OMG_Zombies.Scripts.Sprites
         public void LoadContent()
         {
             // sprite sheets animadas
-            idleAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/idle"), 0.1f, true);
-            runAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/run"), 0.1f, true);
-            jumpAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/jump"), 0.1f, false);
-            deadAnimation = new Animation(Game1._Content.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
+            idleAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/idle"), 0.1f, true);
+            runAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/run"), 0.1f, true);
+            jumpAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/jump"), 0.1f, false);
+            deadAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
 
             // sons
-            jumpSound = Game1._Content.Load<SoundEffect>("Sounds/PlayerJump");
-            dieSound = Game1._Content.Load<SoundEffect>("Sounds/PlayerKilled");
+            jumpSound = Game1._content.Load<SoundEffect>("Sounds/PlayerJump");
+            dieSound = Game1._content.Load<SoundEffect>("Sounds/PlayerKilled");
         }
 
         /// <summary>
@@ -207,21 +207,21 @@ namespace OMG_Zombies.Scripts.Sprites
         private void PressKey()
         {
             // se foi para direita
-            if (Gameplay.KeyboardManager.isKeyHeld(Keys.Right) ||
-                Gameplay.KeyboardManager.isKeyHeld(Keys.D))
+            if (Gameplay._keyboardManager.isKeyHeld(Keys.Right) ||
+                Gameplay._keyboardManager.isKeyHeld(Keys.D))
             {
                 speed = 10000f;
             }
             // se foi para esquerda
-            else if (Gameplay.KeyboardManager.isKeyHeld(Keys.Left) ||
-                Gameplay.KeyboardManager.isKeyHeld(Keys.A))
+            else if (Gameplay._keyboardManager.isKeyHeld(Keys.Left) ||
+                Gameplay._keyboardManager.isKeyHeld(Keys.A))
             {
                 speed = -10000f;
             }
 
             // se saltou
-            if (Gameplay.KeyboardManager.isKeyHeld(Keys.Space) ||
-                Gameplay.KeyboardManager.isKeyHeld(Keys.W))
+            if (Gameplay._keyboardManager.isKeyHeld(Keys.Space) ||
+                Gameplay._keyboardManager.isKeyHeld(Keys.W))
             {
                 isJumping = true;
             }
@@ -233,7 +233,7 @@ namespace OMG_Zombies.Scripts.Sprites
         /// </summary>
         public void ApplyPhysics()
         {
-            float elapsedTime = (float)Game1._GameTime.ElapsedGameTime.TotalSeconds;
+            float elapsedTime = (float)Game1._gameTime.ElapsedGameTime.TotalSeconds;
 
             // aplica movimento para a direita ou esquerda
             velocity.X = speed * elapsedTime;

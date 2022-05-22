@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using OMG_Zombies.Scripts.Sprites;
+using OMG_Zombies.Scripts.UI;
 using OMG_Zombies.Scripts.Utils;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace OMG_Zombies.Scripts.Managers
         //private const int EntityLayer = 2;
 
         // fundos
-        private List<Background> backgrounds;
+        private List<Image> backgrounds;
 
         // jogador principal (heroi)
         private Player player;
@@ -98,7 +99,7 @@ namespace OMG_Zombies.Scripts.Managers
 
         private void LoadSounds()
         {
-            completedLevelSound = Game1._Content.Load<SoundEffect>("Sounds/ExitReached");
+            completedLevelSound = Game1._content.Load<SoundEffect>("Sounds/ExitReached");
         }
 
         private void LoadTilemap(Stream fileStream)
@@ -109,13 +110,13 @@ namespace OMG_Zombies.Scripts.Managers
         private void LoadBackgrounds(int levelIndex)
         {
             int numberOfBackgrounds = tilemap.Width / Tile.WIDTH;
-            backgrounds = new List<Background>();
+            backgrounds = new List<Image>();
 
             for (int i = 0; i < numberOfBackgrounds; i++)
             {
-                backgrounds.Add(new Background(
-                    Game1._Content.Load<Texture2D>("Backgrounds/lvl" + levelIndex),
-                    new Vector2(i * Game1._ScreenWidth, 0),
+                backgrounds.Add(new Image(
+                    Game1._content.Load<Texture2D>("Backgrounds/lvl" + levelIndex),
+                    new Vector2(i * Game1._screenWidth, 0),
                     0.99f));
             }
         }
@@ -184,7 +185,7 @@ namespace OMG_Zombies.Scripts.Managers
         /// </summary>
         private void DecrementTime()
         {
-            currentTime -= Game1._GameTime.ElapsedGameTime;
+            currentTime -= Game1._gameTime.ElapsedGameTime;
         }
 
         /// <summary>
@@ -260,7 +261,7 @@ namespace OMG_Zombies.Scripts.Managers
 
         private void DrawBackground()
         {
-            foreach (Background background in backgrounds)
+            foreach (Image background in backgrounds)
             {
                 background.Draw();
             }

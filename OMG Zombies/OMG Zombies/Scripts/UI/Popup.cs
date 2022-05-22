@@ -13,7 +13,7 @@ namespace OMG_Zombies.Scripts.UI
         {
             get
             {
-                Vector2 screenCenter = new Vector2(Game1._ScreenWidth / 2, Game1._ScreenHeight / 2);
+                Vector2 screenCenter = new Vector2(Game1._screenWidth / 2, Game1._screenHeight / 2);
                 Vector2 statusSize = new Vector2(texture.Width, texture.Height);
 
                 return screenCenter - statusSize / 2;
@@ -28,12 +28,12 @@ namespace OMG_Zombies.Scripts.UI
 
         private void LoadContent()
         {
-            texture = Game1._Content.Load<Texture2D>(texturePath);
+            texture = Game1._content.Load<Texture2D>(texturePath);
         }
 
         public void Draw()
         {
-            Game1._SpriteBatch.Draw(texture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            Game1._spriteBatch.Draw(texture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
     }
 }

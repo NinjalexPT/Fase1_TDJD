@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using OMG_Zombies.Scripts.Managers;
@@ -16,7 +15,7 @@ namespace OMG_Zombies.Scripts.Scenes
         #region Campos e propriedades
 
         // teclado do jogo
-        public static KeyboardManager KeyboardManager;
+        public static KeyboardManager _keyboardManager;
 
         // estado do nível atual do jogo
         private Level level;
@@ -35,24 +34,24 @@ namespace OMG_Zombies.Scripts.Scenes
         public Gameplay(Game1 game)
             : base(game)
         {
+            LoadKeyboard();
             LoadContent();
+        }
+
+        private void LoadKeyboard()
+        {
+            _keyboardManager = new KeyboardManager();
         }
 
         public override void LoadContent()
         {
-            LoadKeyboardManager();
             LoadCamera();
             LoadNextLevel();
         }
 
-        private void LoadKeyboardManager()
-        {
-            KeyboardManager = new KeyboardManager();
-        }
-
         private void LoadCamera()
         {
-            camera = new Camera(Game1._GraphicsDevice.Viewport);
+            camera = new Camera(Game1._graphicsDevice.Viewport);
         }
 
         private void LoadNextLevel()
@@ -82,9 +81,9 @@ namespace OMG_Zombies.Scripts.Scenes
 
         public override void Update()
         {
-            KeyboardManager.Update();
+            UpdateKeyboard();
 
-            bool isPlaying = KeyboardManager.IsKeyPressed(Keys.Space);
+            bool isPlaying = _keyboardManager.IsKeyPressed(Keys.Space);
 
             if (!wasPlaying && isPlaying)
             {
@@ -107,9 +106,14 @@ namespace OMG_Zombies.Scripts.Scenes
 
             if (levelIndex - 1 == numberOfLevels)
             {
-                Game1._CurrentSceneType = SceneType.MainMenu;
-                Game1._CurrentScene = new Gameplay(game);
+                Game1._currentSceneType = SceneType.MainMenu;
+                Game1._currentScene = new MainMenu(game);
             }
+        }
+
+        private void UpdateKeyboard()
+        {
+            _keyboardManager.Update();
         }
 
         private void UpdateLevel()
@@ -129,13 +133,13 @@ namespace OMG_Zombies.Scripts.Scenes
 
         public override void Draw()
         {
-            Game1._SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
+            Game1._spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
             DrawLevel();
             DrawLabels();
             DrawPopups();
 
-            Game1._SpriteBatch.End();
+            Game1._spriteBatch.End();
         }
 
         private void DrawLevel()

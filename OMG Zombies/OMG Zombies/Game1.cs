@@ -1,13 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using OMG_Zombies.Scripts.Managers;
 using OMG_Zombies.Scripts.Scenes;
-using OMG_Zombies.Scripts.Sprites;
-using OMG_Zombies.Scripts.UI;
 using OMG_Zombies.Scripts.Utils;
-using System.IO;
 
 namespace OMG_Zombies
 {
@@ -22,18 +17,18 @@ namespace OMG_Zombies
         private GraphicsDeviceManager graphics;
 
         // variáveis globais
-        public static int _ScreenWidth = 1120;
-        public static int _ScreenHeight = 640;
-        public static Point _ScreenCenter = new Point(_ScreenWidth / 2, _ScreenHeight / 2);
+        public static int _screenWidth = 1120;
+        public static int _screenHeight = 640;
+        public static Point _screenCenter = new Point(_screenWidth / 2, _screenHeight / 2);
 
-        public static GraphicsDevice _GraphicsDevice;
-        public static ContentManager _Content;
-        public static SpriteBatch _SpriteBatch;
-        public static GameTime _GameTime;
+        public static GraphicsDevice _graphicsDevice;
+        public static ContentManager _content;
+        public static SpriteBatch _spriteBatch;
+        public static GameTime _gameTime;
 
         // estado da cena atual
-        public static SceneType _CurrentSceneType;
-        public static Scene _CurrentScene;
+        public static SceneType _currentSceneType;
+        public static Scene _currentScene;
 
         #endregion
 
@@ -45,16 +40,16 @@ namespace OMG_Zombies
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = false;
 
-            _Content = Content;
-            _Content.RootDirectory = "Content";
+            _content = Content;
+            _content.RootDirectory = "Content";
 
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = _ScreenWidth;
-            graphics.PreferredBackBufferHeight = _ScreenHeight;
+            graphics.PreferredBackBufferWidth = _screenWidth;
+            graphics.PreferredBackBufferHeight = _screenHeight;
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -63,12 +58,12 @@ namespace OMG_Zombies
         protected override void LoadContent()
         {
             // permite que sejam desenhadas texturas no ecrã
-            _SpriteBatch = new SpriteBatch(GraphicsDevice);
-            _GraphicsDevice = GraphicsDevice;
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _graphicsDevice = GraphicsDevice;
 
             // primeira cena aparecer
-            _CurrentSceneType = SceneType.MainMenu;
-            _CurrentScene = new MainMenu(this);
+            _currentSceneType = SceneType.MainMenu;
+            _currentScene = new MainMenu(this);
         }
 
         #endregion
@@ -78,10 +73,10 @@ namespace OMG_Zombies
 
         protected override void Update(GameTime gameTime)
         {
-            _GameTime = gameTime;
-            _CurrentScene.Update();
+            _gameTime = gameTime;
+            _currentScene.Update();
 
-            base.Update(_GameTime);
+            base.Update(_gameTime);
         }
 
         #endregion
@@ -94,10 +89,10 @@ namespace OMG_Zombies
             // cor padrão do ecrã
             GraphicsDevice.Clear(Color.Black);
 
-            _GameTime = gameTime;
-            _CurrentScene.Draw();
+            _gameTime = gameTime;
+            _currentScene.Draw();
 
-            base.Draw(_GameTime);
+            base.Draw(_gameTime);
         }
 
         #endregion

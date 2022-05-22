@@ -65,7 +65,7 @@ namespace OMG_Zombies.Scripts.Effects
                 throw new NotSupportedException("Erro: Nenhuma animação encontrada.");
             }
 
-            frameTime += (float)Game1._GameTime.ElapsedGameTime.TotalSeconds;
+            frameTime += (float)Game1._gameTime.ElapsedGameTime.TotalSeconds;
 
             while (frameTime > Animation.TimeBetweenEachFrame)
             {
@@ -85,7 +85,7 @@ namespace OMG_Zombies.Scripts.Effects
             // Calculate the source rectangle of the current frame.
             Rectangle source = new Rectangle(FrameIndex * Animation.SpriteSheet.Height, 0, Animation.SpriteSheet.Height, Animation.SpriteSheet.Height);
 
-            Game1._SpriteBatch.Draw(Animation.SpriteSheet, position, source, Color.White, 0f, Origin, 1f, spriteEffects, 1f);
+            Game1._spriteBatch.Draw(Animation.SpriteSheet, position, source, Color.White, 0f, Origin, 1f, spriteEffects, 1f);
         }
 
         #endregion

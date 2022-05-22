@@ -73,7 +73,7 @@ namespace OMG_Zombies.Scripts.Sprites
             spriteFolder = "Sprites/" + spriteFolder + "/";
 
             // animações
-            idleAnimation = new Animation(Game1._Content.Load<Texture2D>(spriteFolder + "Idle"), 0.15f, true);
+            idleAnimation = new Animation(Game1._content.Load<Texture2D>(spriteFolder + "Idle"), 0.15f, true);
         }
 
         /// <summary>

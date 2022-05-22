@@ -49,7 +49,7 @@
 /processorParam:TextureFormat=Color
 /build:Backgrounds/lvl2.png
 
-#begin Button.png
+#begin Buttons/credits.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,7 +59,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Button.png
+/build:Buttons/credits.png
+
+#begin Buttons/exit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buttons/exit.png
+
+#begin Buttons/play.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buttons/play.png
 
 #begin Fonts/charybdis.ttf
 /copy:Fonts/charybdis.ttf
@@ -84,6 +108,11 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Hud.spritefont
+
+#begin introduction.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:introduction.mp4
 
 #begin Levels/lvl0.txt
 /copy:Levels/lvl0.txt
@@ -237,6 +266,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Hero/run.png
+
+#begin Storyboards/introduction.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:Storyboards/introduction.mp4
 
 #begin Tiles/F.png
 /importer:TextureImporter
