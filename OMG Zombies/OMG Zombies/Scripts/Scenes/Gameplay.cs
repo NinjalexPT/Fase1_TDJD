@@ -182,22 +182,22 @@ namespace OMG_Zombies.Scripts.Scenes
         private void DrawPopups()
         {
             Popup currentPopup = null;
-            Vector2 centerScreen = new Vector2((int)camera.Center.X  , (int)camera.Center.Y);
+            Vector2 screenCenter = new Vector2((int)camera.Center.X  , (int)camera.Center.Y);
 
             if (level.CompletedLevel)
             {
                 if (level.CompletedLevel)
                 {
-                    currentPopup = new Popup("Popups/youwin", centerScreen);
+                    currentPopup = new Popup("Popups/youwin", screenCenter);
                 }
                 else
                 {
-                    currentPopup = new Popup("Popups/youlose", centerScreen);
+                    currentPopup = new Popup("Popups/youlose", screenCenter);
                 }
             }
             else if (!level.Player.IsAlive)
             {
-                currentPopup = new Popup("Popups/youaredead", centerScreen);
+                currentPopup = new Popup("Popups/youaredead", screenCenter);
             }
 
             if (currentPopup != null)

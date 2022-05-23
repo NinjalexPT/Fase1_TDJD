@@ -26,6 +26,12 @@ namespace OMG_Zombies.Scripts.UI
             font = Game1._content.Load<SpriteFont>(fontPath);
         }
 
+        public void SetCenterTextInScreen(Vector2 screenCenter)
+        {
+            Vector2 size = font.MeasureString(text);
+            position = screenCenter - size / 2;
+        }
+
         public void Draw()
         {
             Game1._spriteBatch.DrawString(font, text, position, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);

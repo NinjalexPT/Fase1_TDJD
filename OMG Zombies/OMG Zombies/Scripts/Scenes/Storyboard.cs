@@ -12,7 +12,6 @@ namespace OMG_Zombies.Scripts.Scenes
 
         // imagem
         private List<Image> storyboards;
-        private Image currentStoryboard;
         private int currentIndex;
 
         // teclado
@@ -33,7 +32,6 @@ namespace OMG_Zombies.Scripts.Scenes
             this.storyboards = storyboards;
             this.nextSceneType = nextSceneType;
             this.nextScene = nextScene;
-
             currentIndex = 0;
 
             LoadKeyboard();

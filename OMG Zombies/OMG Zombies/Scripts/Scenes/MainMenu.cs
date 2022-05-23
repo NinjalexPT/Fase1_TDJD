@@ -93,7 +93,18 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void CreditsButton_Click(object sender, EventArgs e)
         {
-            // TO DO
+            string text = "OMG Zombies\n\n" +
+                "Jogo produzido no âmbito da unidade curricular\n" +
+                "'Técnicas de Desenvolvimento de Vídeojogos',\n" +
+                "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
+                "Desenvolvedores:\n" +
+                "- Ademar Valente\n" +
+                "- Luís Pereira\n\n" +
+                "Barcelos, Maio 2022\n\n" +
+                "© Todos os direitos reservados.";
+
+            Game1._currentSceneType = SceneType.Credits;
+            Game1._currentScene = new Credits(game, text);
         }
 
         private void PlayGameButton_Click(object sender, EventArgs e)
