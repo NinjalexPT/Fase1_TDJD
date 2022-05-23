@@ -6,6 +6,7 @@ using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.UI;
 using OMG_Zombies.Scripts.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace OMG_Zombies.Scripts.Scenes
@@ -56,9 +57,22 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void LoadNextLevel()
         {
-            // se concluiu todos os níveis, volta para o primeiro nível
+            // se concluiu todos os níveis
             if (levelIndex == numberOfLevels - 1)
             {
+                List<Image> storyboards = new List<Image>()
+                {
+                    new Image(Game1._content.Load<Texture2D>("Storyboards/storyend1"), new Vector2(0, 0)),
+                    new Image(Game1._content.Load<Texture2D>("Storyboards/storyend2"), new Vector2(0, 0)),
+                    new Image(Game1._content.Load<Texture2D>("Storyboards/storyend3"), new Vector2(0, 0)),
+                };
+
+                SceneType nextSceneType = SceneType.MainMenu;
+                Scene nextScene = new MainMenu(game);
+
+                Game1._currentSceneType = SceneType.Storyboard;
+                Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
+
                 levelIndex = -1;
             }
 
