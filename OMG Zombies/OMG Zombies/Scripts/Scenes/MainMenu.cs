@@ -98,10 +98,19 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void PlayGameButton_Click(object sender, EventArgs e)
         {
-            Image background = new Image(Game1._content.Load<Texture2D>("Backgrounds/lvl2"), new Vector2(0, 0));
-         
-            Game1._currentSceneType = SceneType.Cutscene;
-            Game1._currentScene = new Cutscene(game, background);
+            List<Image> storyboards = new List<Image>()
+            {
+                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart1"), new Vector2(0, 0)),
+                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart2"), new Vector2(0, 0)),
+                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart3"), new Vector2(0, 0)),
+                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart4"), new Vector2(0, 0))
+            };
+
+            SceneType nextSceneType = SceneType.Gameplay;
+            Scene nextScene = new Gameplay(game);
+
+            Game1._currentSceneType = SceneType.Storyboard;
+            Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
         }
 
         private void QuitGameButton_Click(object sender, EventArgs e)

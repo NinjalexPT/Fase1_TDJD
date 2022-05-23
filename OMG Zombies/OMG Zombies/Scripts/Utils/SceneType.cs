@@ -3,7 +3,7 @@
     public enum SceneType
     {
         MainMenu = 0,
-        Cutscene = 1,
+        Storyboard = 1,
         Gameplay = 2,
         Credits = 3
     }
