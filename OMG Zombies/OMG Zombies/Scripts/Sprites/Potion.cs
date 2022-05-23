@@ -57,7 +57,7 @@ namespace OMG_Zombies.Scripts.Sprites
         public void LoadContent(string filename)
         {
             texture = Game1._content.Load<Texture2D>("Tiles/" + filename);
-            collectedSound = Game1._content.Load<SoundEffect>("Sounds/GemCollected");
+            collectedSound = Game1._content.Load<SoundEffect>("Sounds/collectpotion");
         }
 
         /// <summary>

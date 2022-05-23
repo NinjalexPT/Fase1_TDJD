@@ -138,8 +138,8 @@ namespace OMG_Zombies.Scripts.Sprites
             deadAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
 
             // sons
-            jumpSound = Game1._content.Load<SoundEffect>("Sounds/PlayerJump");
-            dieSound = Game1._content.Load<SoundEffect>("Sounds/PlayerKilled");
+            jumpSound = Game1._content.Load<SoundEffect>("Sounds/jump");
+            dieSound = Game1._content.Load<SoundEffect>("Sounds/lose");
         }
 
         /// <summary>

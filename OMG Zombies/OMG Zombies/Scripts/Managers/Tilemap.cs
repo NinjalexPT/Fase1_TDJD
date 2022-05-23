@@ -223,7 +223,6 @@ namespace OMG_Zombies.Scripts.Managers
 
                     if (texture != null)
                     {
-                        // Draw it in screen space.
                         Vector2 position = new Vector2(x, y) * Tile.size;
                         Game1._spriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     }

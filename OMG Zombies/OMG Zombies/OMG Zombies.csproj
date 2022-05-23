@@ -30,6 +30,10 @@
   <ItemGroup>
     <Folder Include="Content\Backgrounds\" />
     <Folder Include="Content\Levels\" />
+    <Folder Include="Content\Logos\" />
+    <Folder Include="Content\Popups\" />
+    <Folder Include="Content\Sounds\" />
     <Folder Include="Content\Sprites\Enemy\" />
+    <Folder Include="Content\Storyboards\" />
   </ItemGroup>
 </Project>

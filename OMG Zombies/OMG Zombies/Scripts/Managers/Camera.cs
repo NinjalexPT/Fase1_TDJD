@@ -11,9 +11,15 @@ namespace OMG_Zombies.Scripts.Managers
             get => transform;
         }
 
-        private Vector2 center;
-
         private Viewport viewport;
+
+        // centro do ecrã, independente quando se move para direita ou esquerda no mapa
+        private Vector2 center;
+        public Vector2 Center
+        {
+            get => center;
+            set => center = value;
+        }
 
         public Camera(Viewport newViewport)
         {
@@ -49,8 +55,8 @@ namespace OMG_Zombies.Scripts.Managers
             }
 
             transform = Matrix.CreateTranslation(new Vector3(
-                -center.X + (viewport.Width / 2),
-                -center.Y + (viewport.Height / 2),
+                -Center.X + (viewport.Width / 2),
+                -Center.Y + (viewport.Height / 2),
                 0));
         }
     }

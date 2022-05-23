@@ -38,7 +38,7 @@ namespace OMG_Zombies.Scripts.Scenes
             try
             {
                 MediaPlayer.IsRepeating = true;
-                MediaPlayer.Play(Game1._content.Load<Song>("Sounds/Music"));
+                MediaPlayer.Play(Game1._content.Load<Song>("Sounds/theme"));
             }
             catch
             {

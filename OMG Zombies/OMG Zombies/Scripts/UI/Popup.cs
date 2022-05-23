@@ -8,21 +8,24 @@ namespace OMG_Zombies.Scripts.UI
         private string texturePath;
         private Texture2D texture;
 
-        // obtém a posição no centro do ecrã
-        private Vector2 Position
+        // centro do ecrã
+        private Vector2 screenCenter;
+
+        // centrar imagem
+        public Vector2 Position
         {
             get
             {
-                Vector2 screenCenter = new Vector2(Game1._screenWidth / 2, Game1._screenHeight / 2);
-                Vector2 statusSize = new Vector2(texture.Width, texture.Height);
-
-                return screenCenter - statusSize / 2;
+                Vector2 textureSize = new Vector2(texture.Width, texture.Height);
+                return screenCenter - textureSize / 2;
             }
         }
 
-        public Popup(string texturePath)
+        public Popup(string texturePath, Vector2 screenCenter)
         {
             this.texturePath = texturePath;
+            this.screenCenter = screenCenter;
+
             LoadContent();
         }
 

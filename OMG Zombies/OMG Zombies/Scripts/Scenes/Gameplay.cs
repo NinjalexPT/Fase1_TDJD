@@ -156,31 +156,34 @@ namespace OMG_Zombies.Scripts.Scenes
             string scoreText = "SCORE: " +
                 level.Score.ToString();
 
-            Label labelTime = new Label("Fonts/Hud", timeText, new Vector2(0f, 0f), Color.Yellow);
+            int xPosition = (int)camera.Center.X - 560;
+
+            Label labelTime = new Label("Fonts/Hud", timeText, new Vector2(xPosition, 0f), Color.Yellow);
             labelTime.Draw();
 
-            Label labelScore = new Label("Fonts/Hud", scoreText, new Vector2(0f, 25f), Color.Yellow);
+            Label labelScore = new Label("Fonts/Hud", scoreText, new Vector2(xPosition, 25f), Color.Yellow);
             labelScore.Draw();
         }
 
         private void DrawPopups()
         {
             Popup currentPopup = null;
+            Vector2 centerScreen = new Vector2((int)camera.Center.X  , (int)camera.Center.Y);
 
             if (level.CompletedLevel)
             {
                 if (level.CompletedLevel)
                 {
-                    currentPopup = new Popup("Popups/you_win");
+                    currentPopup = new Popup("Popups/youwin", centerScreen);
                 }
                 else
                 {
-                    currentPopup = new Popup("Popups/you_lose");
+                    currentPopup = new Popup("Popups/youlose", centerScreen);
                 }
             }
             else if (!level.Player.IsAlive)
             {
-                currentPopup = new Popup("Popups/you_lose");
+                currentPopup = new Popup("Popups/youaredead", centerScreen);
             }
 
             if (currentPopup != null)

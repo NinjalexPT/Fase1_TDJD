@@ -19,10 +19,6 @@ namespace OMG_Zombies.Scripts.Managers
     {
         #region Campos e Propriedes
 
-        //private Texture2D[] layers;
-        // The layer which entities are drawn on top of.
-        //private const int EntityLayer = 2;
-
         // fundos
         private List<Image> backgrounds;
 
@@ -99,7 +95,7 @@ namespace OMG_Zombies.Scripts.Managers
 
         private void LoadSounds()
         {
-            completedLevelSound = Game1._content.Load<SoundEffect>("Sounds/ExitReached");
+            completedLevelSound = Game1._content.Load<SoundEffect>("Sounds/win");
         }
 
         private void LoadTilemap(Stream fileStream)
