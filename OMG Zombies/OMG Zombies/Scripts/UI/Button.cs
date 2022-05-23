@@ -11,13 +11,14 @@ namespace OMG_Zombies.Scripts.UI
 
         // sobre textura
         private Texture2D texture;
-        public float Scale { get; set; }
+        private int width;
+        private int height;
         public Vector2 Position { get; set; }
         public Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)Position.X, (int)Position.Y, width, height);
             }
         }
 
@@ -37,12 +38,13 @@ namespace OMG_Zombies.Scripts.UI
 
         #region Métodos
 
-        public Button(Texture2D texture, SpriteFont font)
+        public Button(Texture2D texture, SpriteFont font, int width, int height)
         {
             this.texture = texture;
             this.font = font;
+            this.width = width;
+            this.height = height;
 
-            Scale = 1f;
             TextColor = Color.White;
             BackgroundColor = Color.White;
         }
@@ -52,7 +54,6 @@ namespace OMG_Zombies.Scripts.UI
             this.texture = texture;
             this.font = font;
 
-            Scale = scale;
             TextColor = Color.White;
             BackgroundColor = Color.White;
         }

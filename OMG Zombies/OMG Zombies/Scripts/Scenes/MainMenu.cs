@@ -60,21 +60,21 @@ namespace OMG_Zombies.Scripts.Scenes
             SpriteFont buttonFont_normal = Game1._content.Load<SpriteFont>("Fonts/charybdis_normal");
             SpriteFont buttonFont_big = Game1._content.Load<SpriteFont>("Fonts/charybdis_big");
 
-            Button creditsButton = new Button(creditsButton_texture, null)
+            Button creditsButton = new Button(creditsButton_texture, null, 250, 150)
             {
-                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2 - 250, Game1._screenCenter.Y + 150),
+                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2 - 320, Game1._screenCenter.Y + 95),
             };
             creditsButton.Click += CreditsButton_Click;
 
-            Button playGameButton = new Button(playGameButton_texture, null)
+            Button playGameButton = new Button(playGameButton_texture, null, 255, 155)
             {
-                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2, Game1._screenCenter.Y + 150),
+                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2 + 20, Game1._screenCenter.Y + 130),
             };
             playGameButton.Click += PlayGameButton_Click;
 
-            Button quitGameButton = new Button(quitGameButton_texture, null)
+            Button quitGameButton = new Button(quitGameButton_texture, null, 235, 135)
             {
-                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2 + 250, Game1._screenCenter.Y + 150),
+                Position = new Vector2(Game1._screenCenter.X - playGameButton_texture.Width / 2 + 340, Game1._screenCenter.Y + 95),
             };
             quitGameButton.Click += QuitGameButton_Click;
 
@@ -159,7 +159,7 @@ namespace OMG_Zombies.Scripts.Scenes
 
         private void DrawLogo()
         {
-            Game1._spriteBatch.Draw(logo, new Vector2(Game1._screenCenter.X - logo.Width / 2, Game1._screenCenter.Y - 265), Color.White);
+            Game1._spriteBatch.Draw(logo, new Vector2(Game1._screenCenter.X - logo.Width / 2, Game1._screenCenter.Y - 285), Color.White);
         }
 
         private void DrawButtons()
