@@ -230,6 +230,7 @@ namespace OMG_Zombies.Scripts.Managers
         {
             completedLevel = true;
             completedLevelSound.Play();
+            player.OnPlayerCompletedLevel();
         }
 
         /// <summary>

@@ -35,6 +35,8 @@ namespace OMG_Zombies.Scripts.Sprites
         private SpriteEffects flip = SpriteEffects.None;
 
         // sons
+        private SoundEffect runSound;
+        private SoundEffectInstance runSoundInstace;
         private SoundEffect jumpSound;
         private SoundEffect dieSound;
 
@@ -105,7 +107,7 @@ namespace OMG_Zombies.Scripts.Sprites
         private float layer;
         public float Layer
         {
-            get => layer; 
+            get => layer;
             set => layer = value;
         }
 
@@ -138,6 +140,8 @@ namespace OMG_Zombies.Scripts.Sprites
             deadAnimation = new Animation(Game1._content.Load<Texture2D>("Sprites/Hero/dead"), 0.1f, false);
 
             // sons
+            runSound = Game1._content.Load<SoundEffect>("Sounds/run");
+            runSoundInstace = runSound.CreateInstance();
             jumpSound = Game1._content.Load<SoundEffect>("Sounds/jump");
             dieSound = Game1._content.Load<SoundEffect>("Sounds/lose");
         }
@@ -190,10 +194,12 @@ namespace OMG_Zombies.Scripts.Sprites
             {
                 if (Velocity.X > 0 || Velocity.X < 0)
                 {
+                    runSoundInstace.Play();
                     animator.PlayAnimation(runAnimation);
                 }
                 else
                 {
+                    runSoundInstace.Stop();
                     animator.PlayAnimation(idleAnimation);
                 }
             }
@@ -395,7 +401,13 @@ namespace OMG_Zombies.Scripts.Sprites
                 dieSound.Play();
             }
 
+            runSoundInstace.Stop();
             animator.PlayAnimation(deadAnimation);
+        }
+
+        public void OnPlayerCompletedLevel()
+        {
+            runSoundInstace.Stop();
         }
 
         #endregion

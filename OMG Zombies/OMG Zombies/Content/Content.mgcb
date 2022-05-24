@@ -190,6 +190,12 @@
 /processorParam:Quality=Best
 /build:Sounds/lose.wav
 
+#begin Sounds/run.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/run.wav
+
 #begin Sounds/theme.wma
 /importer:WmaImporter
 /processor:SongProcessor
