@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using OMG_Zombies.Scripts.Scenes;
 using OMG_Zombies.Scripts.Sprites;
 using OMG_Zombies.Scripts.UI;
 using OMG_Zombies.Scripts.Utils;
@@ -66,6 +68,13 @@ namespace OMG_Zombies.Scripts.Managers
             get => score;
         }
 
+        private bool levelFreezed = false;
+        public bool LevelFreezed
+        {
+            get => levelFreezed;
+            set => levelFreezed = value;
+        }
+
         #endregion
 
 
@@ -74,9 +83,10 @@ namespace OMG_Zombies.Scripts.Managers
         /// <summary>
         /// Controi um novo nível.
         /// </summary>
-        public Level(Stream fileStream, int levelIndex)
+        public Level(Stream fileStream, int levelIndex, int seconds, int currentScore)
         {
-            SetInitialTime(120);
+            SetInitialTime(seconds);
+            SetCurrentScore(currentScore);
             LoadContent(fileStream, levelIndex);
         }
 
@@ -84,6 +94,11 @@ namespace OMG_Zombies.Scripts.Managers
         {
             fullTime = TimeSpan.FromSeconds(seconds);
             currentTime = fullTime;
+        }
+
+        private void SetCurrentScore(int currentScore)
+        {
+            score = currentScore;
         }
 
         private void LoadContent(Stream fileStream, int levelIndex)
@@ -155,24 +170,43 @@ namespace OMG_Zombies.Scripts.Managers
 
         public void Update()
         {
-            // se o jogador está e ainda não completou o nível
-            if (player.IsAlive && !completedLevel)
+            // serve para quando o nível estiver congelado, voltar a permitir jogar,
+            // o nível fica congelado, caso o jogador esteja morto, ou perdeu por tempo ou completo o n+ivel
+            // (por outras palavras o nível está congelado quando aparece uma popup) 
+            if (Gameplay._keyboardManager.IsKeyPressed(Keys.Space))
             {
-                DecrementTime();
-                UpdatePlayer();
-                UpdatePotions();
-                UpdateEnemies();
-
-                // se o jogador está a tocar no centro do limite inferior do fim do níveld
-                if (Player.IsOnGround && Player.Collider.Contains(endPosition))
-                {
-                    CompleteLevel();
-                }
+                levelFreezed = false;
             }
-            // se morreu ou já terminou o nível
-            else
+
+            if (!levelFreezed)
             {
-                CurrentTime = TimeSpan.Zero;
+                // se o jogador está vivo e ainda não completou o nível e ainda tem tempo
+                if (player.IsAlive && !completedLevel && CurrentTime >= TimeSpan.Zero)
+                {
+                    DecrementTime();
+                    UpdatePlayer();
+                    UpdatePotions();
+                    UpdateEnemies();
+
+                    // se o jogador está a tocar no tile de fim do nível (no centro do limite inferior)
+                    if (Player.IsOnGround && Player.Collider.Contains(endPosition))
+                    {
+                        CompleteLevel();
+                    }
+                }
+
+                // se terminou o nível
+                else if (completedLevel)
+                {
+                    CurrentTime = TimeSpan.Zero;
+                    levelFreezed = true;
+                }
+                // se morreu ou ficou sem tempo
+                else
+                {
+                    CurrentTime = TimeSpan.Zero;
+                    levelFreezed = true;
+                }
             }
         }
 
@@ -219,7 +253,7 @@ namespace OMG_Zombies.Scripts.Managers
                 // se tocar numa poção
                 if (potion.Collider.Intersects(Player.Collider))
                 {
-                    score += 5;
+                    score += 1;
                     potion.OnPotionCollected();
                     potions.RemoveAt(i--);
                 }

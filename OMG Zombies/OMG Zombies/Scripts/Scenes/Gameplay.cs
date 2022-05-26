@@ -27,6 +27,9 @@ namespace OMG_Zombies.Scripts.Scenes
         // camara do jogo
         private static Camera camera;
 
+        // guardar a pontuação atual do nível atual (é progressiva, ou seja permanece de nível para nível)
+        private int currentScore;
+
         #endregion
 
 
@@ -74,17 +77,33 @@ namespace OMG_Zombies.Scripts.Scenes
                 Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
 
                 levelIndex = -1;
+                currentScore = 0;
             }
 
             // índice do próximo nível
             levelIndex += 1;
-
             string levelPath = "Content/Levels/lvl" + levelIndex + ".txt";
+
+            if (level != null)
+            {
+                currentScore = level.Score;
+            }
 
             // carrega o nivel
             using (Stream fileStream = TitleContainer.OpenStream(levelPath))
             {
-                level = new Level(fileStream, levelIndex);
+                if (levelIndex == 0)
+                {
+                    level = new Level(fileStream, levelIndex, 10, currentScore);
+                }
+                else if (levelIndex == 1)
+                {
+                    level = new Level(fileStream, levelIndex, 180, currentScore);
+                }
+                else if (levelIndex == 2)
+                {
+                    level = new Level(fileStream, levelIndex, 240, currentScore);
+                }
             }
         }
 
@@ -182,7 +201,7 @@ namespace OMG_Zombies.Scripts.Scenes
         private void DrawPopups()
         {
             Popup currentPopup = null;
-            Vector2 screenCenter = new Vector2((int)camera.Center.X  , (int)camera.Center.Y);
+            Vector2 screenCenter = new Vector2((int)camera.Center.X, (int)camera.Center.Y);
 
             if (level.CompletedLevel)
             {
@@ -190,14 +209,14 @@ namespace OMG_Zombies.Scripts.Scenes
                 {
                     currentPopup = new Popup("Popups/youwin", screenCenter);
                 }
-                else
-                {
-                    currentPopup = new Popup("Popups/youlose", screenCenter);
-                }
             }
             else if (!level.Player.IsAlive)
             {
                 currentPopup = new Popup("Popups/youaredead", screenCenter);
+            }
+            else if (level.CurrentTime <= TimeSpan.Zero)
+            {
+                currentPopup = new Popup("Popups/youlose", screenCenter);
             }
 
             if (currentPopup != null)

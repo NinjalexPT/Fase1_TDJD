@@ -20,13 +20,13 @@ namespace OMG_Zombies.Scripts.Sprites
         // o nível atual
         public Level Level
         {
-            get { return level; }
+            get => level;
         }
         private Level level;
 
         // animações
         private Animation idleAnimation;
-        private Animation runAnimation;
+        public Animation runAnimation;
         private Animation jumpAnimation;
         private Animation deadAnimation;
 
@@ -392,6 +392,18 @@ namespace OMG_Zombies.Scripts.Sprites
         /// <summary>
         /// Called when the player has been killed.
         /// </summary>
+        public void OnPlayerWithoutTime()
+        {
+            isAlive = false;
+            dieSound.Play();
+            animator.PlayAnimation(deadAnimation);
+
+            runSoundInstace.Stop();
+        }
+
+        /// <summary>
+        /// Called when the player has been killed.
+        /// </summary>
         public void OnPlayerDied(Enemy killedBy)
         {
             isAlive = false;
@@ -401,8 +413,8 @@ namespace OMG_Zombies.Scripts.Sprites
                 dieSound.Play();
             }
 
-            runSoundInstace.Stop();
             animator.PlayAnimation(deadAnimation);
+            runSoundInstace.Stop();
         }
 
         public void OnPlayerCompletedLevel()
