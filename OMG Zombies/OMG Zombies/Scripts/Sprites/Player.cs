@@ -74,6 +74,7 @@ namespace OMG_Zombies.Scripts.Sprites
         private bool isJumping;
         private float jumpTime;
 
+        // sobre movimento do salto
         private const float GRAVITY = 3400f;
         private const float MAX_JUMP_TIME = 0.15f;
         private const float MAX_JUMP_SPEED = 500f;
@@ -295,34 +296,35 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Detects and resolves all collisions between the player and his neighboring
-        /// tiles. When a collision is detected, the player is pushed away along one
-        /// axis to prevent overlapping. There is some special logic for the Y axis to
-        /// handle platforms which behave differently depending on direction of movement.
+        /// Deteta e resolve todas as colisões com o tilemap,
+        /// o jogador é empurrado para um eixo para evitar sobreposição com o tile
         /// </summary>
         private void HandleTilemapCollisions()
         {
-            // Get the player's bounding rectangle and find neighboring tiles.
+            // obtém o colisor na posição atual do jogador
             Rectangle bounds = Collider;
+
+            // obtém os tiles que se encontram na vizinhança da posição atual do jogador
             int leftTile = (int)Math.Floor((float)bounds.Left / Tile.WIDTH);
             int rightTile = (int)Math.Ceiling(((float)bounds.Right / Tile.WIDTH)) - 1;
             int topTile = (int)Math.Floor((float)bounds.Top / Tile.HEIGHT);
             int bottomTile = (int)Math.Ceiling(((float)bounds.Bottom / Tile.HEIGHT)) - 1;
 
-            // Reset flag to search for ground collision.
+            // reseta se está no chão para procurar colisões
             isOnGround = false;
 
-            // For each potentially colliding tile,
+            // para cada potencial colisão
             for (int y = topTile; y <= bottomTile; ++y)
             {
                 for (int x = leftTile; x <= rightTile; ++x)
                 {
-                    // If this tile is collidable,
+                    // recebe o tipo do tile atual
                     CollisionType type = Level.Tilemap.GetTileType(x, y);
 
+                    // se o tile atual é colisível
                     if (type != CollisionType.transparent)
                     {
-                        // Determine collision depth (with direction) and magnitude.
+                        // determina a profundidade da colisão entre o colisor do jogador e a colisão do tile (atual que está a ser verificado pelo loop)
                         Rectangle tileBounds = Level.Tilemap.GetTileCollider(x, y);
                         Vector2 depth = RectangleHelper.GetIntersectionDepth(bounds, tileBounds);
 
@@ -331,31 +333,31 @@ namespace OMG_Zombies.Scripts.Sprites
                             float absDepthX = Math.Abs(depth.X);
                             float absDepthY = Math.Abs(depth.Y);
 
-                            // Resolve the collision along the shallow axis.
+                            // resolve a colisão ao longo do eixo
                             if (absDepthY < absDepthX)
                             {
-                                // If we crossed the top of a tile, we are on the ground.
+                                // se o jogador está no topo do tile, está no chão
                                 if (previousBottom <= tileBounds.Top)
                                 {
                                     isOnGround = true;
                                 }
 
-                                // Ignore platforms, unless we are on the ground.
+                                // se é o tile é colisível e o jogador está no chão
                                 if (type == CollisionType.block || isOnGround)
                                 {
-                                    // Resolve the collision along the Y axis.
+                                    // resolve a colisão ao longo do eixo Y (atualiza a posição do jogador)
                                     Position = new Vector2(Position.X, Position.Y + depth.Y);
 
-                                    // Perform further collisions with the new bounds.
+                                    // atualiza o colisor do jogador com os novos limites
                                     bounds = Collider;
                                 }
                             }
                             else if (type == CollisionType.block)
                             {
-                                // Resolve the collision along the X axis.
+                                // resolve a colisão ao longo do eixo X (atualiza a posição do jogador)
                                 Position = new Vector2(Position.X + depth.X, Position.Y);
 
-                                // Perform further collisions with the new bounds.
+                                // atualiza o colisor do jogador com os novos limites
                                 bounds = Collider;
                             }
                         }
@@ -363,7 +365,7 @@ namespace OMG_Zombies.Scripts.Sprites
                 }
             }
 
-            // Save the new bounds bottom.
+            // atualiza a posição inferior que o jogador está no momento
             previousBottom = bounds.Bottom;
         }
 

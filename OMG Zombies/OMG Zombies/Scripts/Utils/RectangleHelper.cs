@@ -25,40 +25,33 @@ namespace OMG_Zombies.Scripts.Utils
         }
 
         /// <summary>
-        /// Calculates the signed depth of intersection between two rectangles.
+        /// Calcula a profundidade da interseção de 2 retângulos
         /// </summary>
-        /// <returns>
-        /// The amount of overlap between two intersecting rectangles. These
-        /// depth values can be negative depending on which wides the rectangles
-        /// intersect. This allows callers to determine the correct direction
-        /// to push objects in order to resolve collisions.
-        /// If the rectangles are not intersecting, Vector2.Zero is returned.
-        /// </returns>
         public static Vector2 GetIntersectionDepth(this Rectangle rectA, Rectangle rectB)
         {
-            // Calculate half sizes.
-            float halfWidthA = rectA.Width / 2.0f;
-            float halfHeightA = rectA.Height / 2.0f;
-            float halfWidthB = rectB.Width / 2.0f;
-            float halfHeightB = rectB.Height / 2.0f;
+            // calcula a metade do tamanho de cada retângulo
+            float halfWidthA = rectA.Width / 2f;
+            float halfHeightA = rectA.Height / 2f;
+            float halfWidthB = rectB.Width / 2f;
+            float halfHeightB = rectB.Height / 2f;
 
-            // Calculate centers.
+            // calcula os centros de cada retângulo
             Vector2 centerA = new Vector2(rectA.Left + halfWidthA, rectA.Top + halfHeightA);
             Vector2 centerB = new Vector2(rectB.Left + halfWidthB, rectB.Top + halfHeightB);
 
-            // Calculate current and minimum-non-intersecting distances between centers.
+            // calcula as distâncias atuais e mínimas entre os retângulos
             float distanceX = centerA.X - centerB.X;
             float distanceY = centerA.Y - centerB.Y;
             float minDistanceX = halfWidthA + halfWidthB;
             float minDistanceY = halfHeightA + halfHeightB;
 
-            // If we are not intersecting at all, return (0, 0).
+            // se não houve interseção entre os retângulos
             if (Math.Abs(distanceX) >= minDistanceX || Math.Abs(distanceY) >= minDistanceY)
             {
                 return Vector2.Zero;
             }
 
-            // Calculate and return intersection depths.
+            // calcula a profundidade da interseção
             float depthX = distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
             float depthY = distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
             return new Vector2(depthX, depthY);
