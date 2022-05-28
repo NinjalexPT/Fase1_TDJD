@@ -8,24 +8,36 @@ using System.Collections.Generic;
 
 namespace OMG_Zombies.Scripts.Scenes
 {
+    /// <summary>
+    /// Representa a cena do menu principal
+    /// </summary>
     public class MainMenu : Scene
     {
         #region Campos e propriedades
 
+        // logótipo
         private Texture2D logo;
+        
+        // botões
         private List<Button> buttons;
 
         #endregion
 
 
-        #region Carregar menu
+        #region Carregar
 
+        /// <summary>
+        /// Constroi a cena do menu principal
+        /// </summary>
         public MainMenu(Game1 game)
             : base(game)
         {
             LoadContent();
         }
 
+        /// <summary>
+        /// Carrega o conteúdo para a cena do menu principal
+        /// </summary>
         public override void LoadContent()
         {
             PlayBackgroundSong();
@@ -33,6 +45,9 @@ namespace OMG_Zombies.Scripts.Scenes
             LoadButtons();
         }
 
+        /// <summary>
+        /// Tocar música de fundo do jogo
+        /// </summary>
         private void PlayBackgroundSong()
         {
             try
@@ -46,11 +61,17 @@ namespace OMG_Zombies.Scripts.Scenes
             }
         }
 
+        /// <summary>
+        /// Carregar o logótipo
+        /// </summary>
         private void LoadLogo()
         {
             logo = Game1._content.Load<Texture2D>("Logos/logomenu");
         }
 
+        /// <summary>
+        /// Carregar os botões do menu
+        /// </summary>
         private void LoadButtons()
         {
             Texture2D creditsButton_texture = Game1._content.Load<Texture2D>("Buttons/credits");
@@ -91,6 +112,9 @@ namespace OMG_Zombies.Scripts.Scenes
 
         #region Eventos de input (mouse)
 
+        /// <summary>
+        /// Quando o utilizador clica no botão dos créditos
+        /// </summary>
         private void CreditsButton_Click(object sender, EventArgs e)
         {
             string text = "OMG Zombies\n\n" +
@@ -107,6 +131,9 @@ namespace OMG_Zombies.Scripts.Scenes
             Game1._currentScene = new Credits(game, text);
         }
 
+        /// </summary>
+        /// Quando o utilizador clica no botão de jogar
+        /// </summary>
         private void PlayGameButton_Click(object sender, EventArgs e)
         {
             List<Image> storyboards = new List<Image>()
@@ -124,6 +151,9 @@ namespace OMG_Zombies.Scripts.Scenes
             Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
         }
 
+        /// </summary>
+        /// Quando o utilizador clica no botão de sair
+        /// </summary>
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
             game.Exit();
@@ -132,8 +162,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Atualizar menu
+        #region Atualizar
 
+        /// <summary>
+        /// Atualiza o menu principal, ao clicar num botão
+        /// </summary>
         public override void Update()
         {
             foreach (Button button in buttons)
@@ -145,8 +178,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Desenhar menu
+        #region Desenhar
 
+        /// <summary>
+        /// Desenha o menu principal
+        /// </summary>
         public override void Draw()
         {
             Game1._spriteBatch.Begin();
@@ -157,11 +193,17 @@ namespace OMG_Zombies.Scripts.Scenes
             Game1._spriteBatch.End();
         }
 
+        /// <summary>
+        /// Desenha o logótipo
+        /// </summary>
         private void DrawLogo()
         {
             Game1._spriteBatch.Draw(logo, new Vector2(Game1._screenCenter.X - logo.Width / 2, Game1._screenCenter.Y - 285), Color.White);
         }
 
+        /// <summary>
+        /// Desenha os botões
+        /// </summary>
         private void DrawButtons()
         {
             foreach (Button button in buttons)

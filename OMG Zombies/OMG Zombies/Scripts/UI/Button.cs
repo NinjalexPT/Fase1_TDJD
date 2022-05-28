@@ -5,11 +5,14 @@ using System;
 
 namespace OMG_Zombies.Scripts.UI
 {
+    /// <summary>
+    /// Representa um botão
+    /// </summary>
     public class Button
     {
         #region Campos e propriedades
 
-        // sobre textura
+        // sobre textura (imagem)
         private Texture2D texture;
         private int width;
         private int height;
@@ -36,8 +39,11 @@ namespace OMG_Zombies.Scripts.UI
         #endregion
 
 
-        #region Métodos
+        #region Carregar
 
+        /// <summary>
+        /// Constroi um novo botão, que é possível definir a largura e altura
+        /// </summary>
         public Button(Texture2D texture, SpriteFont font, int width, int height)
         {
             this.texture = texture;
@@ -49,7 +55,10 @@ namespace OMG_Zombies.Scripts.UI
             BackgroundColor = Color.White;
         }
 
-        public Button(Texture2D texture, SpriteFont font, float scale)
+        /// <summary>
+        /// Constroi um novo botão, onde a largura e altura é definida automaticamente pelo tamanho da padrão da textura
+        /// </summary>
+        public Button(Texture2D texture, SpriteFont font)
         {
             this.texture = texture;
             this.font = font;
@@ -58,6 +67,14 @@ namespace OMG_Zombies.Scripts.UI
             BackgroundColor = Color.White;
         }
 
+        #endregion
+
+
+        #region Atualizar
+
+        /// <summary>
+        /// Atualiza o botão
+        /// </summary>
         public void Update()
         {
             previousMouse = currentMouse;
@@ -74,12 +91,22 @@ namespace OMG_Zombies.Scripts.UI
             }
         }
 
+        #endregion
+
+
+        #region Desenhar
+
+        /// <summary>
+        /// Desenha o botão
+        /// </summary>
         public void Draw()
         {
             BackgroundColor = Color.White;
 
+            // desenha a imagem definida
             Game1._spriteBatch.Draw(texture, Rectangle, BackgroundColor);
 
+            // desenha o texto, se o texto foi definido
             if (!string.IsNullOrEmpty(Text))
             {
                 float x = (Rectangle.X + (Rectangle.Width / 2)) - (font.MeasureString(Text).X / 2);

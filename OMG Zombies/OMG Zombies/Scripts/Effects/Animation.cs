@@ -3,18 +3,20 @@
 namespace OMG_Zombies.Scripts.Effects
 {
     /// <summary>
-    /// Representa uma sprite sheet animada.
+    /// Representa uma sprite sheet animada
     /// </summary>
     public class Animation
     {
         #region Campos e Propriedes
 
+        // textura da animação completa
         private Texture2D spriteSheet;
         public Texture2D SpriteSheet
         {
             get => spriteSheet;
         }
 
+        // tempo entre cada frame
         private float timeBetweenEachFrame;
         public float TimeBetweenEachFrame
         {
@@ -28,16 +30,17 @@ namespace OMG_Zombies.Scripts.Effects
             get => isLooping;
         }
 
+        // número de frames
         public int NumberOfFrames
         {
             get => SpriteSheet.Width / FrameHeight;
         }
 
+        // largura e altura de cada frame 
         public int FrameWidth
         {
             get => SpriteSheet.Height;
         }
-
         public int FrameHeight
         {
             get => SpriteSheet.Height;
@@ -46,10 +49,10 @@ namespace OMG_Zombies.Scripts.Effects
         #endregion
 
 
-        #region Criar animação
+        #region Carregar
 
         /// <summary>
-        /// Constroi uma nova animação.
+        /// Constroi uma nova animação
         /// </summary>        
         public Animation(Texture2D spriteSheet, float timeBetweenEachFrame, bool isLooping)
         {

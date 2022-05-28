@@ -3,8 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OMG_Zombies.Scripts.Managers
 {
+    /// <summary>
+    /// Representa a câmera do jogo
+    /// </summary>
     public class Camera
     {
+        #region Campos e propriedades
+
         private Matrix transform;
         public Matrix Transform
         {
@@ -21,11 +26,27 @@ namespace OMG_Zombies.Scripts.Managers
             set => center = value;
         }
 
+        #endregion
+
+
+        #region Carregar
+
+        /// <summary>
+        /// Constroi a câmera do jogo para cada nível
+        /// </summary>
         public Camera(Viewport newViewport)
         {
             viewport = newViewport;
         }
 
+        #endregion
+
+
+        #region Atualizar
+
+        /// <summary>
+        /// Atualiza a câmera, quando o jogador se move
+        /// </summary>
         public void Update(Vector2 position, int xOffset, int yOffset)
         {
             if (position.X < viewport.Width / 2)
@@ -59,5 +80,7 @@ namespace OMG_Zombies.Scripts.Managers
                 -Center.Y + (viewport.Height / 2),
                 0));
         }
+
+        #endregion
     }
 }

@@ -6,6 +6,9 @@ using OMG_Zombies.Scripts.Utils;
 
 namespace OMG_Zombies.Scripts.Scenes
 {
+    /// <summary>
+    /// Representa a cena dos créditos
+    /// </summary>
     public class Credits : Scene
     {
         #region Campos e propriedades
@@ -20,8 +23,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Carregar cena dos créditos
+        #region Carregar
 
+        /// <summary>
+        /// Constroi a cena dos créditos
+        /// </summary>
         public Credits(Game1 game, string text)
             : base(game)
         {
@@ -30,19 +36,28 @@ namespace OMG_Zombies.Scripts.Scenes
             LoadKeyboard();
         }
 
+        /// <summary>
+        /// Carrega o conteúdo para a cena
+        /// </summary>
         public override void LoadContent()
         {
             LoadLabel();
         }
 
+        /// <summary>
+        /// Carrega o texto da cena
+        /// </summary>
         private void LoadLabel()
         {
             Vector2 screenCenter = new Vector2(Game1._screenCenter.X, Game1._screenCenter.Y);
 
-            label = new Label("Fonts/Hud", text, new Vector2(0,0) , Color.White);
+            label = new Label("Fonts/Hud", text, new Vector2(0, 0), Color.White);
             label.SetCenterTextInScreen(screenCenter);
         }
 
+        /// <summary>
+        /// Carrega o teclado
+        /// </summary>
         private void LoadKeyboard()
         {
             keyboardManager = new KeyboardManager();
@@ -51,41 +66,53 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Atualizar cena dos créditos
+        #region Atualizar
 
+        /// <summary>
+        /// Atualiza a cena dos créditos
+        /// </summary>
         public override void Update()
         {
             UpdateKeyboard();
 
             if (keyboardManager.IsKeyPressed(Keys.Space))
             {
-                Game1._currentSceneType = SceneType.MainMenu;
-                Game1._currentScene = new MainMenu(game);
+                GoToMenuScene();
             }
         }
 
+        /// <summary>
+        /// Atualiza o teclado
+        /// </summary>
         private void UpdateKeyboard()
         {
             keyboardManager.Update();
         }
 
+        /// <summary>
+        /// Sai da cena dos créditos e vai para o menu principal
+        /// </summary>
+        private void GoToMenuScene()
+        {
+            Game1._currentSceneType = SceneType.MainMenu;
+            Game1._currentScene = new MainMenu(game);
+        }
+
         #endregion
 
 
-        #region Desenhar cena dos créditos
+        #region Desenhar
 
+        /// <summary>
+        /// Desenha a cena dos créditos
+        /// </summary>
         public override void Draw()
         {
             Game1._spriteBatch.Begin();
 
-            DrawLabel();
+            label.Draw();
 
             Game1._spriteBatch.End();
-        }
-
-        private void DrawLabel()
-        {
-            label.Draw();
         }
 
         #endregion

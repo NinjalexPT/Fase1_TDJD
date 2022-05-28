@@ -11,6 +11,9 @@ using System.IO;
 
 namespace OMG_Zombies.Scripts.Scenes
 {
+    /// <summary>
+    /// Representa a cena do jogo em si
+    /// </summary>
     public class Gameplay : Scene
     {
         #region Campos e propriedades
@@ -33,8 +36,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Carregar gameplay
+        #region Carregar
 
+        /// <summary>
+        /// Constroi a cena do jogo em si
+        /// </summary>
         public Gameplay(Game1 game)
             : base(game)
         {
@@ -42,22 +48,34 @@ namespace OMG_Zombies.Scripts.Scenes
             LoadContent();
         }
 
+        /// <summary>
+        /// Carrega o teclado
+        /// </summary>
         private void LoadKeyboard()
         {
             _keyboardManager = new KeyboardManager();
         }
 
+        /// <summary>
+        /// Carrega o conteúdo da cena
+        /// </summary>
         public override void LoadContent()
         {
             LoadCamera();
             LoadNextLevel();
         }
 
+        /// <summary>
+        /// Carrega a câmera
+        /// </summary>
         private void LoadCamera()
         {
             camera = new Camera(Game1._graphicsDevice.Viewport);
         }
 
+        /// <summary>
+        /// Carrega o próximo nível
+        /// </summary>
         private void LoadNextLevel()
         {
             // se concluiu todos os níveis
@@ -94,7 +112,7 @@ namespace OMG_Zombies.Scripts.Scenes
             {
                 if (levelIndex == 0)
                 {
-                    level = new Level(fileStream, levelIndex, 10, currentScore);
+                    level = new Level(fileStream, levelIndex, 120, currentScore);
                 }
                 else if (levelIndex == 1)
                 {
@@ -110,8 +128,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Atualizar gameplay
+        #region Atualizar
 
+        /// <summary>
+        /// Atualiza o estado da cena do jogo
+        /// </summary>
         public override void Update()
         {
             UpdateKeyboard();
@@ -144,16 +165,25 @@ namespace OMG_Zombies.Scripts.Scenes
             }
         }
 
+        /// <summary>
+        /// Atualiza o teclado
+        /// </summary>
         private void UpdateKeyboard()
         {
             _keyboardManager.Update();
         }
 
+        /// <summary>
+        /// Atualiza os objetos do nível
+        /// </summary>
         private void UpdateLevel()
         {
             level.Update();
         }
 
+        /// <summary>
+        /// Atualiza a posição da câmera através do movimento do jogador
+        /// </summary>
         private void UpdateCamera()
         {
             camera.Update(level.Player.Position, (int)level.Player.Position.X * Tile.WIDTH, 640);
@@ -162,8 +192,11 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Desenhar gameplay
+        #region Desenhar
 
+        /// <summary>
+        /// Desenha a cena do jogo
+        /// </summary>
         public override void Draw()
         {
             Game1._spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
@@ -175,11 +208,17 @@ namespace OMG_Zombies.Scripts.Scenes
             Game1._spriteBatch.End();
         }
 
+        /// <summary>
+        /// Desenha os objetos do nível
+        /// </summary>
         private void DrawLevel()
         {
             level.Draw();
         }
 
+        /// <summary>
+        /// Desenha o texto da pontuação e tempo
+        /// </summary>
         private void DrawLabels()
         {
             string timeText = "TIME: " +
@@ -198,6 +237,9 @@ namespace OMG_Zombies.Scripts.Scenes
             labelScore.Draw();
         }
 
+        /// <summary>
+        /// Desenha as popups que aparecem quando o jogador morre, ganha ou perde por tempo
+        /// </summary>
         private void DrawPopups()
         {
             Popup currentPopup = null;

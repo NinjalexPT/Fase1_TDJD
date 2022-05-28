@@ -4,12 +4,12 @@ using System;
 namespace OMG_Zombies.Scripts.Utils
 {
     /// <summary>
-    /// Conjunto de métodos para ajudar a trabalhar com retângulos.
+    /// Conjunto de métodos para ajudar a trabalhar com retângulos
     /// </summary>
     public static class RectangleHelper
     {
         /// <summary>
-        /// Gets the position of the center of the center of the rectangle.
+        /// Obtém o ponto central de um rectângulo
         /// </summary>
         public static Vector2 GetOrigin(this Rectangle rectangle)
         {
@@ -17,7 +17,7 @@ namespace OMG_Zombies.Scripts.Utils
         }
 
         /// <summary>
-        /// Gets the position of the center of the bottom edge of the rectangle.
+        /// Obtém a posição do centro da borda inferior de um rectângulo
         /// </summary>
         public static Vector2 GetBottomCenter(this Rectangle rectangle)
         {

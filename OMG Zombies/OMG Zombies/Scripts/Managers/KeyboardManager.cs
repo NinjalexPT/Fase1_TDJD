@@ -7,11 +7,12 @@ namespace OMG_Zombies.Scripts.Managers
 {
     public class KeyboardManager
     {
-        #region Campos e Propriedes
+        #region Campos e propriedes
 
         private KeyboardManager keyboardManager;
         private Dictionary<Keys, KeyState> keysAndState;
 
+        // evemtos do teclado
         private enum KeyState
         {
             PRESSED,
@@ -23,8 +24,11 @@ namespace OMG_Zombies.Scripts.Managers
         #endregion
 
 
-        #region carregar teclado do jogo
+        #region carregar
 
+        /// <summary>
+        /// Cria um teclado, permite criar apenas um teclado por cena
+        /// </summary>
         public KeyboardManager()
         {
             if (keyboardManager == null)
@@ -41,8 +45,11 @@ namespace OMG_Zombies.Scripts.Managers
         #endregion
 
 
-        #region Atualizar teclado do jogo
+        #region Atualizar
 
+        /// <summary>
+        /// Atualiza o estado do teclado
+        /// </summary>
         public void Update()
         {
             KeyboardState state = Keyboard.GetState();
@@ -83,10 +90,19 @@ namespace OMG_Zombies.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Quando o utilizador pressiona uma tecla
+        /// </summary>
         public bool IsKeyPressed(Keys key) => keysAndState.ContainsKey(key) && keysAndState[key] == KeyState.PRESSED;
 
+        /// <summary>
+        /// Quando o utilizador pressiona uma tecla e deixa de pressionar
+        /// </summary>
         public bool IsKeyUp(Keys key) => keysAndState.ContainsKey(key) && keysAndState[key] == KeyState.UP;
 
+        /// <summary>
+        /// Quando o utilizador pressiona uma tecla em um intervalo de tempo
+        /// </summary>
         public bool isKeyHeld(Keys key) => keysAndState.ContainsKey(key) && keysAndState[key] == KeyState.HELD;
 
         #endregion

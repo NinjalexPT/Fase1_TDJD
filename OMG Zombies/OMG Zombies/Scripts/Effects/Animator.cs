@@ -5,7 +5,7 @@ using System;
 namespace OMG_Zombies.Scripts.Effects
 {
     /// <summary>
-    /// Controla as animações das sprite sheets animadas.
+    /// Representa o animador de uma animação (sprite sheet animado)
     /// </summary>
     public class Animator
     {
@@ -37,10 +37,10 @@ namespace OMG_Zombies.Scripts.Effects
         #endregion
 
 
-        #region Mostrar animação
+        #region Atualizar
 
         /// <summary>
-        /// Inicia ou continua a reprodução de uma animação.
+        /// Inicia ou continua a reprodução de uma animação
         /// </summary>
         public void PlayAnimation(Animation animation)
         {
@@ -55,8 +55,13 @@ namespace OMG_Zombies.Scripts.Effects
             frameTime = 0.0f;
         }
 
+        #endregion
+
+
+        #region Desenhar
+
         /// <summary>
-        /// Desenha a atual frame da animação.
+        /// Desenha a frame atual da animação
         /// </summary>
         public void Draw(Vector2 position, SpriteEffects spriteEffects)
         {
@@ -71,7 +76,7 @@ namespace OMG_Zombies.Scripts.Effects
             {
                 frameTime -= Animation.TimeBetweenEachFrame;
 
-                // Advance the frame index; looping or clamping as appropriate.
+                // avança o índice do frame
                 if (Animation.IsLooping)
                 {
                     frameIndex = (frameIndex + 1) % Animation.NumberOfFrames;
@@ -82,7 +87,7 @@ namespace OMG_Zombies.Scripts.Effects
                 }
             }
 
-            // Calculate the source rectangle of the current frame.
+            // calcula o retângulo de origem do frame atual
             Rectangle source = new Rectangle(FrameIndex * Animation.SpriteSheet.Height, 0, Animation.SpriteSheet.Height, Animation.SpriteSheet.Height);
 
             Game1._spriteBatch.Draw(Animation.SpriteSheet, position, source, Color.White, 0f, Origin, 1f, spriteEffects, 1f);

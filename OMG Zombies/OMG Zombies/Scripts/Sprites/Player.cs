@@ -85,18 +85,17 @@ namespace OMG_Zombies.Scripts.Sprites
             get => isOnGround;
         }
 
-        // Calculate bounds within texture size
-        private Rectangle frameBounds;
-
-        // é o retângulo que limita o jogador no world space
+        // limites (bordas) da textura
+        private Rectangle textureBounds;
+        // obtém o retângulo colisor do jogador através dos limites da textura
         public Rectangle Collider
         {
             get
             {
-                int left = (int)(Position.X - animator.Origin.X) + frameBounds.X;
-                int top = (int)(Position.Y - animator.Origin.Y) + frameBounds.Y;
-                int right = frameBounds.Width;
-                int bottom = frameBounds.Height;
+                int left = (int)(Position.X - animator.Origin.X) + textureBounds.X;
+                int top = (int)(Position.Y - animator.Origin.Y) + textureBounds.Y;
+                int right = textureBounds.Width;
+                int bottom = textureBounds.Height;
 
                 return new Rectangle(left, top, right, bottom);
             }
@@ -114,22 +113,22 @@ namespace OMG_Zombies.Scripts.Sprites
         #endregion
 
 
-        #region Carregar jogador
+        #region Carregar
 
         /// <summary>
-        /// Constroi um novo jogador.
+        /// Constroi o jogador (heroi) do nível
         /// </summary>
         public Player(Level level, Vector2 position)
         {
             this.level = level;
 
             LoadContent();
-            SetFrameBounds();
+            SetTextureBounds();
             ResetPlayer(position);
         }
 
         /// <summary>
-        /// Carregar o conteúdo do jogador.
+        /// Carrega o conteúdo do jogador
         /// </summary>
         public void LoadContent()
         {
@@ -147,7 +146,7 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Resetar o jogador para viver.
+        /// Reseta o jogador para voltar a viver
         /// </summary>
         public void ResetPlayer(Vector2 position)
         {
@@ -160,23 +159,26 @@ namespace OMG_Zombies.Scripts.Sprites
             isAlive = true;
         }
 
-        private void SetFrameBounds()
+        /// <summary>
+        /// Calcula os limites (bordas) da textura
+        /// </summary>
+        private void SetTextureBounds()
         {
             int right = (int)(idleAnimation.FrameWidth * 0.55);
             int left = (idleAnimation.FrameWidth - right) / 2;
             int bottom = (int)(idleAnimation.FrameHeight * 0.8);
             int top = idleAnimation.FrameHeight - bottom;
 
-            frameBounds = new Rectangle(left, top, right, bottom);
+            textureBounds = new Rectangle(left, top, right, bottom);
         }
 
         #endregion
 
 
-        #region Atualizar jogador
+        #region Atualizar
 
         /// <summary>
-        /// Atualizar o jogador.
+        /// Atualiza o jogador
         /// </summary>
         public void Update()
         {
@@ -208,7 +210,7 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Pressionar teclas do movimento ou salto do jogador.
+        /// Verifica se pressionou as teclas do movimento ou de salto
         /// </summary>
         private void PressKey()
         {
@@ -234,28 +236,28 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Atualizar a velocidade e posição do jogador,
-        /// baseada nas teclas pressionadas e gravidade no salto.
+        /// Atualiza a velocidade e posição do jogador,
+        /// baseada no tempo e gravidade do salto
         /// </summary>
         public void ApplyPhysics()
         {
             float elapsedTime = (float)Game1._gameTime.ElapsedGameTime.TotalSeconds;
 
-            // aplica movimento para a direita ou esquerda
+            // aplica o movimento para a direita ou esquerda
             velocity.X = speed * elapsedTime;
 
-            // aplica movimento para cima
+            // aplica o movimento para cima
             // e previne que o salto tenha uma velocidade máxima e mínima
             velocity.Y = MathHelper.Clamp(velocity.Y + GRAVITY * elapsedTime, -MAX_JUMP_SPEED, MAX_JUMP_SPEED);
             velocity.Y = Jump(elapsedTime, velocity.Y);
 
-            // atualiza posição
+            // atualiza a posição do jogador
             Position += velocity * elapsedTime;
             Position = new Vector2((float)Math.Round(Position.X), (float)Math.Round(Position.Y));
         }
 
         /// <summary>
-        /// .
+        /// Faz o jogador saltar
         /// </summary>
         private float Jump(float elapsedTime, float velocityY)
         {
@@ -278,15 +280,14 @@ namespace OMG_Zombies.Scripts.Sprites
                 {
                     velocityY = -700f;
                 }
+                // senão atingiu o limite de tempo do salto
                 else
                 {
-                    // atingiu o limite de tempo do salto
                     jumpTime = 0f;
                 }
             }
             else
             {
-                // continua sem pular ou cancela um salto em andamento
                 jumpTime = 0f;
             }
 
@@ -366,6 +367,9 @@ namespace OMG_Zombies.Scripts.Sprites
             previousBottom = bounds.Bottom;
         }
 
+        /// <summary>
+        /// Pára de correr quando colide
+        /// </summary>
         private void ResetVelocityIfCollide(Vector2 previousPosition)
         {
             if (Position.X == previousPosition.X)
@@ -378,6 +382,9 @@ namespace OMG_Zombies.Scripts.Sprites
             }
         }
 
+        /// <summary>
+        /// Reseta as físicas aplicadas
+        /// </summary>
         private void ResetPhysicsApplied()
         {
             speed = 0f;
@@ -390,7 +397,7 @@ namespace OMG_Zombies.Scripts.Sprites
         #region Eventos do nível
 
         /// <summary>
-        /// Called when the player has been killed.
+        /// É chamda quando o jogador ficou sem tempo para concluir o nível
         /// </summary>
         public void OnPlayerWithoutTime()
         {
@@ -402,7 +409,7 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Called when the player has been killed.
+        /// É chamado quando o jogador morre
         /// </summary>
         public void OnPlayerDied(Enemy killedBy)
         {
@@ -417,6 +424,9 @@ namespace OMG_Zombies.Scripts.Sprites
             runSoundInstace.Stop();
         }
 
+        /// <summary>
+        /// É chamado quando o jogador chega à meta (completa o nível)
+        /// </summary>
         public void OnPlayerCompletedLevel()
         {
             runSoundInstace.Stop();
@@ -428,7 +438,7 @@ namespace OMG_Zombies.Scripts.Sprites
         #region Desenhar jogador
 
         /// <summary>
-        /// Desenhar o jogador.
+        /// Desenha o jogador
         /// </summary>
         public void Draw()
         {
@@ -437,7 +447,7 @@ namespace OMG_Zombies.Scripts.Sprites
         }
 
         /// <summary>
-        /// Virar jogador de acordo para onde se está a mover (para a esquerda ou para a direita).
+        /// Vira o jogador de acordo para onde se está a mover (para a esquerda ou para a direita)
         /// </summary>
         public void FlipPlayer()
         {

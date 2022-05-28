@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace OMG_Zombies.Scripts.Scenes
 {
+    /// <summary>
+    /// Representa uma storyboard que aparece no início e fim do jogo
+    /// </summary>
     public class Storyboard : Scene
     {
         #region Campos e propriedades
@@ -24,31 +27,32 @@ namespace OMG_Zombies.Scripts.Scenes
         #endregion
 
 
-        #region Carregar gameplay
+        #region Carregar
 
+        /// <summary>
+        /// Constroi uma nova storyboard com uma ou várias imagens
+        /// </summary>
         public Storyboard(Game1 game, List<Image> storyboards, SceneType nextSceneType, Scene nextScene)
             : base(game)
         {
             this.storyboards = storyboards;
             this.nextSceneType = nextSceneType;
             this.nextScene = nextScene;
-            currentIndex = 0;
 
-            LoadKeyboard();
+            currentIndex = 0;
+            keyboardManager = new KeyboardManager();
         }
 
         public override void LoadContent() { }
 
-        private void LoadKeyboard()
-        {
-            keyboardManager = new KeyboardManager();
-        }
-
         #endregion
 
 
-        #region Atualizar gameplay
+        #region Atualizar
 
+        /// <summary>
+        /// Atualiza a storyboard
+        /// </summary>
         public override void Update()
         {
             UpdateKeyboard();
@@ -58,8 +62,7 @@ namespace OMG_Zombies.Scripts.Scenes
                 // se última storyboard está a ser mostrada
                 if (currentIndex == storyboards.Count - 1)
                 {
-                    Game1._currentSceneType = nextSceneType;
-                    Game1._currentScene = nextScene;
+                    SetCurrentScene();
                 }
                 else // passa para a próxima storyboard
                 {
@@ -68,28 +71,38 @@ namespace OMG_Zombies.Scripts.Scenes
             }
         }
 
+        /// <summary>
+        /// Atualiza o teclado, se houver algum input
+        /// </summary>
         private void UpdateKeyboard()
         {
             keyboardManager.Update();
         }
 
+        /// <summary>
+        /// Passa para a próxima cena, caso tenha terminado todas as imagens da storyboard
+        /// </summary>
+        private void SetCurrentScene()
+        {
+            Game1._currentSceneType = nextSceneType;
+            Game1._currentScene = nextScene;
+        }
+
         #endregion
 
 
-        #region Desenhar gameplay
+        #region Desenhar
 
+        /// <summary>
+        /// Desenhar a storyboard
+        /// </summary>
         public override void Draw()
         {
             Game1._spriteBatch.Begin();
 
-            DrawStoryboards();
+            storyboards[currentIndex].Draw();
 
             Game1._spriteBatch.End();
-        }
-
-        private void DrawStoryboards()
-        {
-            storyboards[currentIndex].Draw();
         }
 
         #endregion

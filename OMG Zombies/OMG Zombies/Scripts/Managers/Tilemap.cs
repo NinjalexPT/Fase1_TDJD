@@ -8,10 +8,14 @@ using System.IO;
 
 namespace OMG_Zombies.Scripts.Managers
 {
+    /// <summary>
+    /// Representa o tilemap para cada nível
+    /// </summary>
     public class Tilemap
     {
         #region Campos e propriedades
 
+        // nível atual
         private Level level;
 
         // cria o tilemap do nível,
@@ -34,8 +38,11 @@ namespace OMG_Zombies.Scripts.Managers
         #endregion
 
 
-        #region Carregar tilemap
+        #region Carregar
 
+        /// <summary>
+        /// Constroi o respetivo tilemap do nível
+        /// </summary>
         public Tilemap(Level level, Stream fileStream)
         {
             this.level = level;
@@ -46,7 +53,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Obtém uma lista com as linhas do ficheiro do nível.
+        /// Obtém a lista com as linhas do ficheiro do nível
         /// </summary>
         private List<string> GetFileLines(Stream fileStream)
         {
@@ -75,9 +82,9 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Criar o tilemap do nível vazio,
-        /// a 1º célula do array é o comprimento (número de caracteres) de cada linha
-        /// e o 2º o número de linhas.
+        /// Cria o tilemap do nível vazio,
+        /// a 1º célula do array é o comprimento (número de caracteres) de cada linha,
+        /// e o 2º é o número de linhas
         /// </summary>
         private void CreateEmptyTilemap(List<string> lines)
         {
@@ -89,7 +96,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Colocar cada caractere do ficheiro para o tilemap.
+        /// Coloca cada caractere do ficheiro para o tilemap
         /// </summary>
         private void LoadTilemap(List<string> lines)
         {
@@ -106,7 +113,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Carrega um tile de acordo com o caractere definido no ficheiro.
+        /// Carrega um tile de acordo com o caractere definido no ficheiro
         /// </summary>
         private Tile LoadTile(char tileType, int x, int y)
         {
@@ -161,7 +168,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria um novo tile, definindo a textura e o tipo de colisão.
+        /// Cria um novo tile, definindo a textura e o tipo de colisão
         /// </summary>
         private Tile NewTile(string name, CollisionType collision)
         {
@@ -169,7 +176,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria um novo tile vazio (sem textura).
+        /// Cria um novo tile vazio (sem textura)
         /// </summary>
         private Tile NewEmptyTile(CollisionType collision)
         {
@@ -179,19 +186,22 @@ namespace OMG_Zombies.Scripts.Managers
         #endregion
 
 
-        #region Colisões do tilemap
+        #region Colisões
 
         /// <summary>
-        /// Obter o retângulo colisor do tile no grid do tilemap.
+        /// Obtém o retângulo colisor de um tile
         /// </summary>
         public Rectangle GetTileCollider(int x, int y)
         {
             return new Rectangle(x * Tile.WIDTH, y * Tile.HEIGHT, Tile.WIDTH, Tile.HEIGHT);
         }
 
+        /// <summary>
+        /// Obtém o tipo de tile de um tile
+        /// </summary>
         public CollisionType GetTileType(int x, int y)
         {
-            // se o jogador escapar na horizontal do ecrã
+            // se o jogador tentar escapar na horizontal do ecrã, bloquear
             if (x < 0 || x >= Width)
             {
                 return CollisionType.block;
@@ -209,18 +219,20 @@ namespace OMG_Zombies.Scripts.Managers
         #endregion
 
 
-        #region Desenhar tilemap
+        #region Desenhar
 
+        /// <summary>
+        /// Desenha cada tile para desenhar todo o tilemap
+        /// </summary>
         public void Draw()
         {
-            // For each tile position
-            for (int y = 0; y < Height; ++y)
+            for (int y = 0; y < Height; y++)
             {
-                for (int x = 0; x < Width; ++x)
+                for (int x = 0; x < Width; x++)
                 {
-                    // If there is a visible tile in that position
                     Texture2D texture = grid[x, y].texture;
 
+                    // desenha o tile, caso o atual tile tenha uma textura 
                     if (texture != null)
                     {
                         Vector2 position = new Vector2(x, y) * Tile.size;

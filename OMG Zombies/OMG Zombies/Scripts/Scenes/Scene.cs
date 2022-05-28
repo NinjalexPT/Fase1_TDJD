@@ -1,5 +1,8 @@
 ﻿namespace OMG_Zombies.Scripts.Scenes
 {
+    /// <summary>
+    /// Representa a classe base para cada cena 
+    /// </summary>
     public abstract class Scene
     {
         #region Campos e propriedades
@@ -9,7 +12,7 @@
         #endregion
 
 
-        #region Métodos base
+        #region Métodos
 
         public Scene(Game1 game)
         {

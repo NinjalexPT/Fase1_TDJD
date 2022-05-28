@@ -13,9 +13,7 @@ using System.IO;
 namespace OMG_Zombies.Scripts.Managers
 {
     /// <summary>
-    /// Controla um nível do jogo.
-    /// Cada nível possui um fundo com várias camadas, um tilemap quadrado que possui um jogador e as plataformas.
-    /// Controla ainda se ganhou ou perdeu e a pontuação do jogador.
+    /// Representa um nível do jogo
     /// </summary>
     public class Level
     {
@@ -31,43 +29,50 @@ namespace OMG_Zombies.Scripts.Managers
             get => player;
         }
 
+        // inimigos e poções
         private List<Enemy> enemies = new List<Enemy>();
         private List<Potion> potions = new List<Potion>();
 
+        // mapa do nível
         private Tilemap tilemap;
         public Tilemap Tilemap
         {
             get => tilemap;
         }
 
-        // localizações chave do nível
+        // posições inicial e final
         private Vector2 startPosition;
         private Vector2 endPosition;
 
+        // se o nível está completo ou não
         private bool completedLevel;
         public bool CompletedLevel
         {
             get => completedLevel;
         }
 
+        // som quando completa o nível
         private SoundEffect completedLevelSound;
 
+        // tempo máximo do nível
         private TimeSpan fullTime;
 
+        // tempo atual
         private TimeSpan currentTime;
-
         public TimeSpan CurrentTime
         {
             get => currentTime;
             set => currentTime = value;
         }
 
+        // pontuação do respetivo nível
         private int score;
         public int Score
         {
             get => score;
         }
 
+        // se o nível está em pausa ou não
         private bool levelFreezed = false;
         public bool LevelFreezed
         {
@@ -81,7 +86,7 @@ namespace OMG_Zombies.Scripts.Managers
         #region Carregar nível
 
         /// <summary>
-        /// Controi um novo nível.
+        /// Constroi o nível atual
         /// </summary>
         public Level(Stream fileStream, int levelIndex, int seconds, int currentScore)
         {
@@ -90,17 +95,26 @@ namespace OMG_Zombies.Scripts.Managers
             LoadContent(fileStream, levelIndex);
         }
 
+        /// <summary>
+        /// Define o tempo (em segundos) para o atual nível
+        /// </summary>
         private void SetInitialTime(int seconds)
         {
             fullTime = TimeSpan.FromSeconds(seconds);
             currentTime = fullTime;
         }
 
+        /// <summary>
+        /// Define o atual a pontuação para o nível atual
+        /// </summary>
         private void SetCurrentScore(int currentScore)
         {
             score = currentScore;
         }
 
+        /// <summary>
+        /// Carrega o conteúdo para o nível
+        /// </summary>
         private void LoadContent(Stream fileStream, int levelIndex)
         {
             LoadSounds();
@@ -108,16 +122,25 @@ namespace OMG_Zombies.Scripts.Managers
             LoadBackgrounds(levelIndex);
         }
 
+        /// <summary>
+        /// Carrega o som de completar o nível
+        /// </summary>
         private void LoadSounds()
         {
             completedLevelSound = Game1._content.Load<SoundEffect>("Sounds/win");
         }
 
+        /// <summary>
+        /// Carrega o mapa do jogo
+        /// </summary>
         private void LoadTilemap(Stream fileStream)
         {
             tilemap = new Tilemap(this, fileStream);
         }
 
+        /// <summary>
+        /// Carrega todos os fundos necessãrios
+        /// </summary>
         private void LoadBackgrounds(int levelIndex)
         {
             int numberOfBackgrounds = tilemap.Width / Tile.WIDTH;
@@ -133,7 +156,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria o jogador (heroi).
+        /// Cria o jogador (heroi)
         /// </summary>
         public void CreatePlayer(Rectangle tileCollider)
         {
@@ -142,7 +165,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria um inimigo.
+        /// Cria um inimigo
         /// </summary>
         public void CreateEnemy(Rectangle tileCollider, string spriteFolder)
         {
@@ -151,13 +174,16 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria uma poção.
+        /// Cria uma poção
         /// </summary>
         public void CreatePotion(Rectangle tileCollider, string filename)
         {
             potions.Add(new Potion(this, tileCollider, filename));
         }
 
+        /// <summary>
+        /// Cria a meta do jogo
+        /// </summary>
         public void CreateExit(Rectangle tileCollider)
         {
             endPosition = RectangleHelper.GetOrigin(tileCollider);
@@ -168,6 +194,9 @@ namespace OMG_Zombies.Scripts.Managers
 
         #region Atualizar nível
 
+        /// <summary>
+        /// Atualiza nível atual
+        /// </summary>
         public void Update()
         {
             // serve para quando o nível estiver congelado, voltar a permitir jogar,
@@ -211,7 +240,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Animates each enemy and allow them to kill the player.
+        /// Faz o tempo decrescer
         /// </summary>
         private void DecrementTime()
         {
@@ -219,7 +248,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// .
+        /// Atualiza o jogador (movimento, colisões e animações)
         /// </summary>
         private void UpdatePlayer()
         {
@@ -227,13 +256,13 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Animates each enemy and allow them to kill the player.
+        /// Atualiza os inimigos, verificar se o jogador tocou em algum inimigo
         /// </summary>
         private void UpdateEnemies()
         {
             foreach (Enemy enemy in enemies)
             {
-                // Touching an enemy instantly kills the player
+                // se o jogador tocar num inimigo
                 if (enemy.Collider.Intersects(Player.Collider))
                 {
                     player.OnPlayerDied(enemy);
@@ -242,7 +271,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// .
+        /// Atualiza as poções, para coletá-las
         /// </summary>
         private void UpdatePotions()
         {
@@ -260,6 +289,9 @@ namespace OMG_Zombies.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Quando o jogador completa o nível
+        /// </summary>
         private void CompleteLevel()
         {
             completedLevel = true;
@@ -268,7 +300,7 @@ namespace OMG_Zombies.Scripts.Managers
         }
 
         /// <summary>
-        /// Restores the player to the starting point to try the level again.
+        /// Inicia um nova vida, para o utilizador tentar o nível novamente no ponto de partida
         /// </summary>
         public void StartNewLife()
         {
@@ -281,6 +313,9 @@ namespace OMG_Zombies.Scripts.Managers
 
         #region Desenhar nível
 
+        /// <summary>
+        /// Desenha os objetos do nível
+        /// </summary>
         public void Draw()
         {
             DrawBackground();
@@ -290,6 +325,9 @@ namespace OMG_Zombies.Scripts.Managers
             DrawEnemies();
         }
 
+        /// <summary>
+        /// Desenha o fundo do nível
+        /// </summary>
         private void DrawBackground()
         {
             foreach (Image background in backgrounds)
@@ -298,16 +336,25 @@ namespace OMG_Zombies.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Desenha o mapa
+        /// </summary>
         private void DrawTilemap()
         {
             tilemap.Draw();
         }
 
+        /// <summary>
+        /// Desenha o jogador
+        /// </summary>
         private void DrawPlayer()
         {
             player.Draw();
         }
 
+        /// <summary>
+        /// Desenha as poções
+        /// </summary>
         private void DrawPotions()
         {
             foreach (Potion potion in potions)
@@ -316,6 +363,9 @@ namespace OMG_Zombies.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Desenha os inimigos
+        /// </summary>
         private void DrawEnemies()
         {
             foreach (Enemy enemy in enemies)
