@@ -85,6 +85,23 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/play.png
 
+#begin Fonts/charybdis.ttf
+/copy:Fonts/charybdis.ttf
+
+#begin Fonts/charybdis_big.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/charybdis_big.spritefont
+
+#begin Fonts/charybdis_normal.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/charybdis_normal.spritefont
+
 #begin Fonts/Hud.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
