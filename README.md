@@ -59,3 +59,22 @@ Para contribuir em desenvolvimento, ler por favor as diretivas estabelecidas par
 
 ## Licença
 Ao contribuir para este projeto, concorda com as políticas da licença MIT.
+
+
+## Mais informações
+Mais informações sobre a construção do projeto.
+
+### Decisões tomadas
+O objetivo ao qual os dois elementos do grupo se propuseram desde o início foi sempre o de criar um Jogo de Plataformas. No decorrer da criação do mesmo foram sendo desenhadas decisões tendo por base a pesquisa e aquisição de conhecimentos teóricos em MonoGame.
+
+Desta forma, foi escolhido jogo de recolha de objetos, com fuga aos inimigos que foram sendo colocados no mapa de jogo. Optamos por não realizar um jogo demasiado complexo, abolindo a implementação de ideias como:
+- Colocar um fundo do tipo "parallax scrolling";
+- Número mínimo de objetos a recolher por cada nível;
+- Criação de projeteis para destruir os inimigos.
+
+
+### Instruções de jogo
+- Recolhe as poções de cura;
+- Evita os Zombies sem retorno;
+- Chega à linha de abrigo antes do fim do tempo;
+- Diverte-te a salvar a vida deste aluno do IPCA antes que o EDJD22 o domine completamente!
