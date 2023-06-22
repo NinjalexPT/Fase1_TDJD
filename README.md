@@ -1,5 +1,5 @@
 # OMG ZOMBIES
-Jogo 2D do tipo platforma alusivo ao tema apocalíptico de propagação de virus "Zombie", em resposta aos pressupostos sugeridos para a realização do projeto enquadrado na unidade curricular de Técnicas de Desenvolvimento de Jogos.
+Jogo 2D do tipo plataforma alusivo ao tema apocalíptico de propagação de virus "Zombie".
 
 <img width="150" height="150" src="OMG Zombies/Content/Logos/logomenu.png">
 
