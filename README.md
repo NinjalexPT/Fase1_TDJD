@@ -1,6 +1,6 @@
 Miguel Silva EDJD 27940
-Hugo
-Samuel Furtado
+Hugo Oliveira EDJD 27920
+Samuel Furtado EDJD 27916
 
 RESUMO do jogo escolhido (OMG_ZOMBIES):
 
