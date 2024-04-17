@@ -42,12 +42,17 @@ Representa o mapa de tiles do nível.
 Gerencia a carga, desenho e interação com os tiles do mapa.
 Métodos para carregar e desenhar o mapa de tiles, além de lidar com colisões.
 
-Resumo Geral:
+>Resumo Geral:
+
 Animation e Animator: Controlam a reprodução de animações em sprite sheets.
+
 Camera: Gerencia a visualização do jogo, ajustando-se à posição do jogador.
+
 KeyboardManager: Monitora e responde aos eventos do teclado.
 Level: Gerencia todos os elementos de um nível do jogo, incluindo jogadores, inimigos, poções e a lógica de jogo.
+
 Tilemap: Representa e controla o mapa de tiles do nível, incluindo carregamento, desenho e interação com os tiles.
+
 Essas classes e funcionalidades formam a base para o desenvolvimento de um jogo em que você pode animar personagens, gerenciar a câmera, interagir com o teclado e criar e gerenciar níveis com diferentes elementos e mecânicas de jogo.
 
 
@@ -56,60 +61,78 @@ Classes de Cena:
 >Credits (Créditos):
 
 Representa a cena de créditos do jogo.
+
 Gerencia o texto dos créditos, o teclado e a transição para outras cenas.
+
 Métodos para carregar e desenhar os créditos, atualizar o teclado e mudar para a cena principal.
 
 >Gameplay (Jogabilidade):
 
 Representa a cena principal do jogo onde a jogabilidade ocorre.
+
 Gerencia o teclado, o estado do nível atual, a câmera e a pontuação.
+
 Métodos para carregar o conteúdo do jogo, atualizar o estado do jogo e desenhar a cena.
 
 >MainMenu (Menu Principal):
 
 Representa a cena do menu principal do jogo.
+
 Gerencia o logotipo, os botões do menu e suas interações.
+
 Métodos para carregar o conteúdo do menu, lidar com interações de botões e desenhar o menu.
 
 >Scene (Cena):
 
 Classe abstrata base para todas as cenas do jogo.
+
 Define métodos abstratos LoadContent(), Draw(), e Update() que devem ser implementados por cenas específicas.
 
 5)Storyboard (História/Introdução):
 
 Representa uma sequência de introdução ou história no início/final do jogo.
+
 Gerencia imagens da storyboard, o teclado e a transição para a próxima cena.
+
 Métodos para carregar e desenhar a storyboard, atualizar o teclado e avançar para a próxima cena.
 
 Resumo das Funcionalidades:
 >Credits (Créditos):
 
 Carrega e exibe os créditos do jogo.
+
 Permite navegar de volta ao menu principal ao pressionar a tecla espaço.
 
 >Gameplay (Jogabilidade):
 
 Controla a lógica principal do jogo, incluindo atualização do estado do nível, controle da câmera e pontuação.
+
 Carrega e exibe o conteúdo do jogo, como níveis e elementos visuais.
+
 Gerencia a transição entre níveis e a conclusão do jogo.
 
 >MainMenu (Menu Principal):
 
 Exibe o menu principal do jogo com opções como iniciar, ver créditos e sair.
+
 Responde a interações do jogador, como clicar em botões para iniciar o jogo ou visualizar os créditos.
+
 Carrega e exibe o conteúdo do menu, como logotipo e botões interativos.
 
 >Scene (Cena):
 
 Serve como uma estrutura base para todas as cenas do jogo.
+
 Define métodos que cada cena específica deve implementar para carregar, desenhar e atualizar seu conteúdo.
 
 >Storyboard (História/Introdução):
 
 Mostra uma sequência de imagens no início ou final do jogo.
+
 Permite avançar para a próxima cena ao pressionar a tecla espaço.
+
 Gerencia a transição entre cenas após a conclusão da storyboard.
+
 Essas classes trabalham juntas para criar uma estrutura de cena flexível e modular para o jogo, permitindo a transição suave entre diferentes partes da experiência do jogador, como menus, jogabilidade e sequências narrativas.
 
 
@@ -152,6 +175,7 @@ layer: Camada na qual o jogador está sendo desenhado.
 Construtor (Player(Level level, Vector2 position)):
 
 Inicializa o jogador com o nível atual e a posição especificada.
+
 Carrega o conteúdo do jogador, como animações e sons.
 
 LoadContent():
@@ -161,12 +185,15 @@ Carrega animações e sons do jogador.
 ResetPlayer(Vector2 position):
 
 Reinicializa o jogador para uma posição específica.
+
 Define o jogador como vivo e reinicia suas propriedades.
 
 Update():
 
 Atualiza o estado e comportamento do jogador.
+
 Verifica entrada do teclado para movimento e salto.
+
 Aplica física ao jogador, lidando com colisões e atualizando animações.
 
 Jump(float elapsedTime, float velocityY):
@@ -176,6 +203,7 @@ Permite ao jogador realizar um salto, ajustando sua velocidade vertical.
 HandleTilemapCollisions():
 
 Detecta e resolve colisões com o mapa de tiles.
+
 Mantém o jogador no chão e evita atravessar obstáculos.
 
 ResetVelocityIfCollide(Vector2 previousPosition):
@@ -190,16 +218,19 @@ Reseta as propriedades físicas aplicadas ao jogador.
 OnPlayerWithoutTime():
 
 Chamado quando o jogador fica sem tempo.
+
 Define o jogador como morto e executa a animação de morte.
 
 OnPlayerDied(Enemy killedBy):
 
 Chamado quando o jogador morre, especificando a causa (por exemplo, inimigo).
+
 Define o jogador como morto, executa a animação de morte e toca o som correspondente.
 
 OnPlayerCompletedLevel():
 
 Chamado quando o jogador completa o nível.
+
 Realiza ações necessárias após a conclusão do nível.
 
 Draw():
@@ -264,10 +295,15 @@ Game1:
 >Campos e Propriedades:
 
 GraphicsDeviceManager (graphics): Gerenciador de dispositivo gráfico para configurações de renderização.
+
 SpriteBatch (spriteBatch): Utilizado para desenhar texturas na tela.
+
 int (screenWidth, screenHeight): Dimensões da tela do jogo.
+
 ContentManager (content): Gerencia o conteúdo carregado para o jogo, como texturas, sons e fontes.
+
 GameTime (gameTime): Fornece informações sobre o tempo do jogo.
+
 Scene (currentScene): Referência à cena atual do jogo.
 
 Métodos Principais:
