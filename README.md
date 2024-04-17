@@ -6,37 +6,37 @@ RESUMO do jogo escolhido (OMG_ZOMBIES):
 
 Classes e Funcionalidades:
 
-1)Animation:
+>Animation:
 
 Classe que representa uma sprite sheet animada.
 Define campos para gerenciar propriedades da animação, como textura (spriteSheet), intervalo entre frames (timeBetweenEachFrame), looping (isLooping), número de frames (NumberOfFrames), largura e altura de cada frame (FrameWidth e FrameHeight).
 Método Animation(Texture2D spriteSheet, float timeBetweenEachFrame, bool isLooping) para inicializar os parâmetros da animação.
 
-2)Animator:
+>Animator:
 
 Classe que controla a reprodução de animações em uma sprite sheet.
 Gerencia a animação atual, índice do frame atual, tempo de exibição do frame e origem da textura.
 Método PlayAnimation(Animation animation) para iniciar ou continuar uma animação.
 Método Draw(Vector2 position, SpriteEffects spriteEffects) para desenhar o frame atual da animação.
 
-3)Camera:
+>Camera:
 
 Representa a câmera do jogo.
 Gerencia transformação, viewport e centro da câmera.
 Método Update(Vector2 position, int xOffset, int yOffset) para atualizar a posição da câmera com base na posição do jogador.
 
-4)KeyboardManager:
+>KeyboardManager:
 
 Gerencia o estado do teclado do jogo.
 Define métodos para atualizar e verificar o estado das teclas.
 
-5)Level:
+>Level:
 
 Representa um nível do jogo.
 Gerencia elementos como fundos, jogador, inimigos, mapa do nível, pontuação, etc.
 Métodos para carregar conteúdo do nível, atualizar estado do nível e desenhar objetos do nível.
 
-6)Tilemap:
+>Tilemap:
 
 Representa o mapa de tiles do nível.
 Gerencia a carga, desenho e interação com os tiles do mapa.
@@ -53,25 +53,25 @@ Essas classes e funcionalidades formam a base para o desenvolvimento de um jogo 
 
 Classes de Cena:
 
-1)Credits (Créditos):
+>Credits (Créditos):
 
 Representa a cena de créditos do jogo.
 Gerencia o texto dos créditos, o teclado e a transição para outras cenas.
 Métodos para carregar e desenhar os créditos, atualizar o teclado e mudar para a cena principal.
 
-2)Gameplay (Jogabilidade):
+>Gameplay (Jogabilidade):
 
 Representa a cena principal do jogo onde a jogabilidade ocorre.
 Gerencia o teclado, o estado do nível atual, a câmera e a pontuação.
 Métodos para carregar o conteúdo do jogo, atualizar o estado do jogo e desenhar a cena.
 
-3)MainMenu (Menu Principal):
+>MainMenu (Menu Principal):
 
 Representa a cena do menu principal do jogo.
 Gerencia o logotipo, os botões do menu e suas interações.
 Métodos para carregar o conteúdo do menu, lidar com interações de botões e desenhar o menu.
 
-4)Scene (Cena):
+>Scene (Cena):
 
 Classe abstrata base para todas as cenas do jogo.
 Define métodos abstratos LoadContent(), Draw(), e Update() que devem ser implementados por cenas específicas.
@@ -113,99 +113,100 @@ Gerencia a transição entre cenas após a conclusão da storyboard.
 Essas classes trabalham juntas para criar uma estrutura de cena flexível e modular para o jogo, permitindo a transição suave entre diferentes partes da experiência do jogador, como menus, jogabilidade e sequências narrativas.
 
 
-Campos e Propriedades:
+>Campos e Propriedades:
 
->level: Referência ao nível atual em que o jogador está.
+level: Referência ao nível atual em que o jogador está.
 
->idleAnimation, runAnimation, jumpAnimation, deadAnimation: Animações para diferentes estados do personagem.
+idleAnimation, runAnimation, jumpAnimation, deadAnimation: Animações para diferentes estados do personagem.
 
->animator: Gerenciador de animação para controlar as animações do jogador.
+animator: Gerenciador de animação para controlar as animações do jogador.
 
->flip: Indicador de orientação do sprite (esquerda/direita).
+flip: Indicador de orientação do sprite (esquerda/direita).
 
->runSound, runSoundInstance, jumpSound, dieSound: Sons associados a diferentes ações do jogador.
+runSound, runSoundInstance, jumpSound, dieSound: Sons associados a diferentes ações do jogador.
 
->isAlive: Indica se o personagem está vivo.
+isAlive: Indica se o personagem está vivo.
 
->position: Posição atual do jogador.
+position: Posição atual do jogador.
 
->velocity: Vetor de velocidade do jogador.
+velocity: Vetor de velocidade do jogador.
 
->speed: Velocidade de movimento horizontal do jogador.
+speed: Velocidade de movimento horizontal do jogador.
 
->isJumping, jumpTime: Estado e tempo de duração do salto.
+isJumping, jumpTime: Estado e tempo de duração do salto.
 
->GRAVITY, MAX_JUMP_TIME, MAX_JUMP_SPEED: Constantes relacionadas à física do salto.
+GRAVITY, MAX_JUMP_TIME, MAX_JUMP_SPEED: Constantes relacionadas à física do salto.
 
->isOnGround: Indica se o jogador está no chão.
+isOnGround: Indica se o jogador está no chão.
 
->textureBounds: Limites da textura do sprite do jogador.
+textureBounds: Limites da textura do sprite do jogador.
 
->collider: Colisor para detecção de colisões.
+collider: Colisor para detecção de colisões.
 
->previousBottom: Posição inferior anterior do jogador.
+previousBottom: Posição inferior anterior do jogador.
 
->layer: Camada na qual o jogador está sendo desenhado.
+layer: Camada na qual o jogador está sendo desenhado.
 
-Métodos:
+>Métodos:
 
->Construtor (Player(Level level, Vector2 position)):
+Construtor (Player(Level level, Vector2 position)):
 
 Inicializa o jogador com o nível atual e a posição especificada.
 Carrega o conteúdo do jogador, como animações e sons.
 
->LoadContent():
+LoadContent():
 
 Carrega animações e sons do jogador.
 
->ResetPlayer(Vector2 position):
+ResetPlayer(Vector2 position):
 
 Reinicializa o jogador para uma posição específica.
 Define o jogador como vivo e reinicia suas propriedades.
 
->Update():
+Update():
 
 Atualiza o estado e comportamento do jogador.
 Verifica entrada do teclado para movimento e salto.
 Aplica física ao jogador, lidando com colisões e atualizando animações.
 
->Jump(float elapsedTime, float velocityY):
+Jump(float elapsedTime, float velocityY):
 
 Permite ao jogador realizar um salto, ajustando sua velocidade vertical.
 
->HandleTilemapCollisions():
+HandleTilemapCollisions():
 
 Detecta e resolve colisões com o mapa de tiles.
 Mantém o jogador no chão e evita atravessar obstáculos.
 
->ResetVelocityIfCollide(Vector2 previousPosition):
+ResetVelocityIfCollide(Vector2 previousPosition):
 
 
->Reseta a velocidade do jogador se não houver movimento.
+Reseta a velocidade do jogador se não houver movimento.
+
 ResetPhysicsApplied():
 
 Reseta as propriedades físicas aplicadas ao jogador.
 
->OnPlayerWithoutTime():
+OnPlayerWithoutTime():
 
 Chamado quando o jogador fica sem tempo.
 Define o jogador como morto e executa a animação de morte.
 
->OnPlayerDied(Enemy killedBy):
+OnPlayerDied(Enemy killedBy):
 
 Chamado quando o jogador morre, especificando a causa (por exemplo, inimigo).
 Define o jogador como morto, executa a animação de morte e toca o som correspondente.
 
->OnPlayerCompletedLevel():
+OnPlayerCompletedLevel():
 
 Chamado quando o jogador completa o nível.
 Realiza ações necessárias após a conclusão do nível.
 
->Draw():
+Draw():
 
 Desenha o jogador na tela, aplicando orientação horizontal conforme necessário.
 
->FlipPlayer():
+FlipPlayer():
 
 Inverte a orientação do sprite do jogador com base na direção do movimento.
 
@@ -260,14 +261,14 @@ Cada uma dessas classes desempenha um papel importante no desenvolvimento do jog
 
 Game1:
 
-Campos e Propriedades:
+>Campos e Propriedades:
 
->GraphicsDeviceManager (graphics): Gerenciador de dispositivo gráfico para configurações de renderização.
->SpriteBatch (spriteBatch): Utilizado para desenhar texturas na tela.
->int (screenWidth, screenHeight): Dimensões da tela do jogo.
->ContentManager (content): Gerencia o conteúdo carregado para o jogo, como texturas, sons e fontes.
->GameTime (gameTime): Fornece informações sobre o tempo do jogo.
->Scene (currentScene): Referência à cena atual do jogo.
+GraphicsDeviceManager (graphics): Gerenciador de dispositivo gráfico para configurações de renderização.
+SpriteBatch (spriteBatch): Utilizado para desenhar texturas na tela.
+int (screenWidth, screenHeight): Dimensões da tela do jogo.
+ContentManager (content): Gerencia o conteúdo carregado para o jogo, como texturas, sons e fontes.
+GameTime (gameTime): Fornece informações sobre o tempo do jogo.
+Scene (currentScene): Referência à cena atual do jogo.
 
 Métodos Principais:
 >Construtor (Game1()):
