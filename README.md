@@ -310,3 +310,6 @@ A classe Game1 é a classe principal que gerencia o ciclo de vida do jogo. Ela c
 Essa classe serve como o ponto de entrada para o jogo MonoGame e é fundamental para o controle do fluxo de execução e interação com o usuário. Todas as operações principais do jogo, como lógica de jogo e renderização, são gerenciadas aqui.
 
 
+Bibliografia
+
+https://github.com/luispereira1999/omg-zombies
