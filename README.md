@@ -4,6 +4,11 @@ Samuel Furtado EDJD 27916
 
 RESUMO do jogo escolhido (OMG_ZOMBIES):
 
+O jogo consiste de um platformer simples em que se tenta chegar ao final do nivel antes do final do tempo e coletar pontos (neste caso através de poções).
+
+A personagem pode mover-se e saltar, porém os inimigos são estaticos.
+
+
 Classes e Funcionalidades:
 
 >Animation:
@@ -345,6 +350,11 @@ A classe Game1 é a classe principal que gerencia o ciclo de vida do jogo. Ela c
 
 
 Essa classe serve como o ponto de entrada para o jogo MonoGame e é fundamental para o controle do fluxo de execução e interação com o usuário. Todas as operações principais do jogo, como lógica de jogo e renderização, são gerenciadas aqui.
+
+
+erros encontrados:
+O personagem fica mais pequeno quando salta (provavelmente devido á diferença de tamanho do sprite em si)
+Devido ao jogo mover o ecrã com o jogador no centro, quando se está a chegar ao final, devido á estrutura do nivel, ficar com o ecrã parcialmente obscurecido.  
 
 
 Bibliografia
